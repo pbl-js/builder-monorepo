@@ -1,5 +1,10 @@
-import { ObjectType, Field } from 'type-graphql';
-import { ComponentType, ComponentTypeEnum } from './component.types';
+import { ObjectType, Field, Int, registerEnumType } from 'type-graphql';
+import { ComponentType } from './component.types';
+
+registerEnumType(ComponentType, {
+  name: 'ComponentType',
+  description: undefined,
+});
 
 @ObjectType()
 export class Component {
@@ -7,5 +12,11 @@ export class Component {
   id: number;
 
   @Field(() => ComponentType)
-  componentType: ComponentTypeEnum;
+  componentType: ComponentType;
+
+  @Field(() => Int)
+  sectionId: number;
+
+  @Field(() => String)
+  props?: string;
 }

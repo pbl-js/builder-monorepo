@@ -75,9 +75,9 @@ model ComponentsOrder {
   id                Int               @id @default(autoincrement())
   componentId       String
   nestedComponents  ComponentsOrder[] @relation("ComponentsOrderToComponentsOrder")
-  ComponentsOrder   ComponentsOrder?  @relation("ComponentsOrderToComponentsOrder", fields: [componentsOrderId], references: [id])
+  componentsOrder   ComponentsOrder?  @relation("ComponentsOrderToComponentsOrder", fields: [componentsOrderId], references: [id])
   componentsOrderId Int?
-  Section           Section?          @relation(fields: [sectionId], references: [id])
+  section           Section?          @relation(fields: [sectionId], references: [id])
   sectionId         Int?
 }
 
@@ -85,6 +85,6 @@ model Section {
   id              Int               @id @default(autoincrement())
   name            String
   destinationUrl  String            @default("http://localhost:1111/graphql")
-  Components      Component[]
+  components      Component[]
   componentsOrder ComponentsOrder[]
 }

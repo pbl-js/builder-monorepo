@@ -6,6 +6,7 @@ import { PostResolver } from './app/resolvers/posts';
 import { PrismaClient } from '@prisma/client';
 import { connect } from 'mongoose';
 import { SectionResolver } from './app/modules/section/section.resolver';
+import { ComponentResolver } from './app/modules/component/component.resolver';
 
 const main = async () => {
   const app = express();
@@ -15,7 +16,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [PostResolver, SectionResolver],
+      resolvers: [PostResolver, SectionResolver, ComponentResolver],
     }),
     context: () => ({ prisma }),
   });
