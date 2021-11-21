@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "builder-api": "apps/builder-api"
+    "builder-api": "apps/builder-api",
+    "builder-dashboard": "apps/builder-dashboard"
+    // "builder-dashboard-e2e": "apps/builder-dashboard-e2e"
   }
 }

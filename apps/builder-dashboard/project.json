@@ -1,0 +1,54 @@
+{
+  "root": "apps/builder-dashboard",
+  "sourceRoot": "apps/builder-dashboard",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/builder-dashboard",
+        "outputPath": "dist/apps/builder-dashboard"
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "builder-dashboard:build",
+        "dev": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "builder-dashboard:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "builder-dashboard:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/builder-dashboard"],
+      "options": {
+        "jestConfig": "apps/builder-dashboard/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/builder-dashboard/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}
