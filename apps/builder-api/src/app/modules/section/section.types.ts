@@ -1,7 +1,4 @@
-import { Document } from 'mongoose';
-
-export interface ISection extends Document {
-  // id: number;
+export interface ISection {
+  id: number;
   name: string;
-  siteUrl: string;
 }

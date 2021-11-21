@@ -1,13 +1,18 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../apps/builder-api/src/@generated"
 }
 
 model Post {
@@ -44,15 +49,42 @@ enum ComponentType {
   CUSTOM
 }
 
+model Props {
+  id          Int       @id @default(autoincrement())
+  component   Component @relation(fields: [componentId], references: [id])
+  componentId Int       @unique
+
+
+  width        String
+  height       String
+  marginTop    String
+  marginRight  String
+  marginBottom String
+  marginLeft   String
+}
+
 model Component {
   id            Int           @id @default(autoincrement())
   componentType ComponentType
   Section       Section?      @relation(fields: [sectionId], references: [id])
   sectionId     Int?
+  props         Props?
+}
+
+model ComponentsOrder {
+  id                Int               @id @default(autoincrement())
+  componentId       String
+  nestedComponents  ComponentsOrder[] @relation("ComponentsOrderToComponentsOrder")
+  ComponentsOrder   ComponentsOrder?  @relation("ComponentsOrderToComponentsOrder", fields: [componentsOrderId], references: [id])
+  componentsOrderId Int?
+  Section           Section?          @relation(fields: [sectionId], references: [id])
+  sectionId         Int?
 }
 
 model Section {
-  id         Int         @id @default(autoincrement())
-  name       String
-  Components Component[]
+  id              Int               @id @default(autoincrement())
+  name            String
+  destinationUrl  String            @default("http://localhost:1111/graphql")
+  Components      Component[]
+  componentsOrder ComponentsOrder[]
 }
