@@ -8,7 +8,9 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "api": "nx run builder-api:serve",
+    "dashboard": "nx run builder-dashboard:serve --port=3333"
   },
   "private": true,
   "dependencies": {
