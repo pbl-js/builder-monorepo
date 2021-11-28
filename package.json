@@ -10,7 +10,8 @@
     "build": "nx build",
     "test": "nx test",
     "api": "nx run builder-api:serve",
-    "dashboard": "nx run builder-dashboard:serve --port=3333"
+    "dashboard": "nx run builder-dashboard:serve --port=3333",
+    "iframe": "nx run builder-iframe:serve --port=4444"
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,34 @@
+{
+  "root": "libs/builder-npm",
+  "sourceRoot": "libs/builder-npm/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/builder-npm",
+        "tsConfig": "libs/builder-npm/tsconfig.lib.json",
+        "project": "libs/builder-npm/package.json",
+        "entryFile": "libs/builder-npm/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "assets": [
+          {
+            "glob": "libs/builder-npm/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/builder-npm/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}

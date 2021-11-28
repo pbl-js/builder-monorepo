@@ -1,4 +1,5 @@
 import styles from './index.module.scss';
+import { BuilderSection } from '@builder-npm';
 
 export function Index() {
   /*
@@ -67,6 +68,7 @@ export function Index() {
       </ul>
       <h2>Next Steps</h2>
       <p>Here are some things you can do with Nx.</p>
+      <BuilderSection name="first-section" />
       <details open>
         <summary>Add UI library</summary>
         <pre>{`# Generate UI lib
