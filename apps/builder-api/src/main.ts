@@ -2,7 +2,6 @@ import 'reflect-metadata';
 import * as express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
-import { PostResolver } from './app/resolvers/posts';
 import { PrismaClient } from '@prisma/client';
 import { connect } from 'mongoose';
 import { SectionResolver } from './app/modules/section/section.resolver';
@@ -16,7 +15,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [PostResolver, SectionResolver, ComponentResolver],
+      resolvers: [SectionResolver, ComponentResolver],
     }),
     context: () => ({ prisma }),
   });

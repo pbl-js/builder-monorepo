@@ -10,10 +10,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator typegraphql {
-  provider = "typegraphql-prisma"
-  output   = "../apps/builder-api/src/@generated"
-}
+// generator typegraphql {
+//   provider = "typegraphql-prisma"
+//   output   = "../apps/builder-api/src/@generated"
+// }
 
 model Post {
   id          Int      @id @default(autoincrement())
@@ -71,20 +71,20 @@ model Component {
   props         Props?
 }
 
-model ComponentsOrder {
-  id                Int               @id @default(autoincrement())
-  componentId       String
-  nestedComponents  ComponentsOrder[] @relation("ComponentsOrderToComponentsOrder")
-  componentsOrder   ComponentsOrder?  @relation("ComponentsOrderToComponentsOrder", fields: [componentsOrderId], references: [id])
-  componentsOrderId Int?
-  section           Section?          @relation(fields: [sectionId], references: [id])
-  sectionId         Int?
-}
+// model ComponentsOrder {
+//   id                Int               @id @default(autoincrement())
+//   componentId       String
+//   nestedComponents  ComponentsOrder[] @relation("ComponentsOrderToComponentsOrder")
+//   componentsOrder   ComponentsOrder?  @relation("ComponentsOrderToComponentsOrder", fields: [componentsOrderId], references: [id])
+//   componentsOrderId Int?
+//   section           Section?          @relation(fields: [sectionId], references: [id])
+//   sectionId         Int?
+// }
 
 model Section {
-  id              Int               @id @default(autoincrement())
-  name            String
-  destinationUrl  String            @default("http://localhost:1111/graphql")
+  id              Int         @id @default(autoincrement())
+  name            String      @unique
+  destinationUrl  String      @default("http://localhost:1111/graphql")
   components      Component[]
-  componentsOrder ComponentsOrder[]
+  componentsOrder Json
 }

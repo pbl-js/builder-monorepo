@@ -1,10 +1,10 @@
-import { ObjectType, Field } from 'type-graphql';
+import { ObjectType, Field, Int } from 'type-graphql';
 import { Component } from '../component/component.model';
 import { IComponent } from '../component/component.types';
 
 @ObjectType()
 export class Section {
-  @Field(() => String)
+  @Field(() => Int)
   id: number;
 
   @Field(() => String)
@@ -12,6 +12,9 @@ export class Section {
 
   @Field(() => String)
   destinationUrl: string;
+
+  @Field()
+  componentsOrder: string;
 
   @Field(() => [Component])
   components?: IComponent[];
