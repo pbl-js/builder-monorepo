@@ -47,6 +47,7 @@ enum ComponentType {
   TEXT
   IMAGE
   CUSTOM
+  WRAPPER
 }
 
 model Props {
