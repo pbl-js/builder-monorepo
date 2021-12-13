@@ -1,4 +1,4 @@
-import { ComponentStyles } from '../types';
+import { ComponentStyles } from '../../types/types';
 
 export const defaultStyles: ComponentStyles = {
   paddingTop: '20px',

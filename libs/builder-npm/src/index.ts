@@ -1,2 +1,4 @@
 import { BuilderSection } from './lib/builderSection/builderSection';
-export { BuilderSection };
+import { BOB } from './lib/utils/bob';
+
+export { BuilderSection, BOB };

@@ -1,8 +1,22 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import './styles.css';
+import { BOB } from '@builder-npm';
+import ProductTile from '../components/productTile';
+
+BOB.init('siema');
+
+BOB.registerComponent(ProductTile, {
+  name: 'DEV-product-tile',
+  inputs: [
+    { name: 'text', type: 'string', defaultValue: 'text' },
+    { name: 'price', type: 'number', defaultValue: 4 },
+  ],
+});
 
 function CustomApp({ Component, pageProps }: AppProps) {
+  // const ComponentTest = BOB._customComponents[0].jsxElement;
+
   return (
     <>
       <Head>

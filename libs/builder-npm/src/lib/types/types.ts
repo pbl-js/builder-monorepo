@@ -1,6 +1,9 @@
+import { BOBInputData } from './inputs.types';
+
 export enum ComponentType {
   TEXT = 'TEXT',
   WRAPPER = 'WRAPPER',
+  CUSTOM = 'CUSTOM',
 }
 
 export type ComponentStyles = Partial<{
@@ -26,6 +29,14 @@ export type ComponentStyles = Partial<{
   color: string;
   borderColor: string;
 }>;
+
+export interface ICustomComponent {
+  componentType: ComponentType.CUSTOM;
+  jsxElement: any;
+  style: ComponentStyles;
+  name: string;
+  data: BOBInputData[];
+}
 
 export interface ComponentOrder {
   componentId: number;

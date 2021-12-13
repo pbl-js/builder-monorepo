@@ -1,5 +1,7 @@
 import styles from './index.module.scss';
 import { BuilderSection } from '@builder-npm';
+import { BOB } from '@builder-npm';
+import { useEffect } from 'react';
 
 export function Index() {
   /*
@@ -7,6 +9,10 @@ export function Index() {
    *
    * Note: The corresponding styles are in the ./index.scss file.
    */
+  useEffect(() => {
+    setTimeout(() => console.log(BOB._customComponents), 1000);
+  }, [BOB]);
+
   return (
     <div className={styles.page}>
       <h2>Resources &amp; Tools</h2>

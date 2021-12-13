@@ -1,4 +1,4 @@
-import { ComponentOrder } from '../../builderComponents/types';
+import { ComponentOrder } from '../../types/types';
 
 export type RenderComponentsType = (
   components: ComponentOrder[]

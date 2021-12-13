@@ -1,4 +1,4 @@
-import { componentOrderType, ComponentType } from '../builderComponents/types';
+import { componentOrderType, ComponentType } from '../types/types';
 
 export const mockSectionData: componentOrderType = [
   {

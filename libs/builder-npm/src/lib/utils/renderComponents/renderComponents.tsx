@@ -1,5 +1,5 @@
 import { BuilderTextComponent } from '../../builderComponents/text/builderTextComponent';
-import { ComponentOrder, ComponentType } from '../../builderComponents/types';
+import { ComponentOrder, ComponentType } from '../../types/types';
 import BuilderWrapperComponent from '../../builderComponents/wrapper/builderWrapperComponent';
 
 export const renderComponents = (components: ComponentOrder[]) => {
