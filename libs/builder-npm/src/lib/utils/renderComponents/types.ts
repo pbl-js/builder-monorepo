@@ -1,4 +1,4 @@
-import { ComponentOrder } from '../../types/types';
+import { ComponentOrder } from '@bob-types';
 
 export type RenderComponentsType = (
   components: ComponentOrder[]

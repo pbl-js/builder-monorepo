@@ -1,4 +1,4 @@
-import { ComponentOrder } from '../../types/types';
+import { ComponentOrder } from '@bob-types';
 import { defaultStyles } from './consts';
 
 export const BuilderTextComponent: React.FC<{ component: ComponentOrder }> = ({

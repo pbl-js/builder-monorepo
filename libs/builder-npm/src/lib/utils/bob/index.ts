@@ -1,5 +1,10 @@
-import { BOBInputData } from '../../types/inputs.types';
-import { ComponentType, ICustomComponent } from '../../types/types';
+import {
+  BOBInputData,
+  ComponentType,
+  ICustomComponent,
+  PostMessageType,
+  RegisterComponentPostMessage,
+} from '@bob-types';
 
 interface CustomComponentInputs {
   name: string;
@@ -47,10 +52,13 @@ export class BOB {
           };
 
           this._customComponents.push(componentToPush);
-          window.postMessage(
-            { messageType: 'register-component', data: componentToPush },
-            '*'
-          );
+
+          const newPostMessage: RegisterComponentPostMessage = {
+            messageType: PostMessageType.REGISTER_COMPONENT,
+            messageData: componentToPush,
+          };
+
+          window.postMessage(newPostMessage, '*');
         }
       }
     }

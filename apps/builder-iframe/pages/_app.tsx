@@ -1,10 +1,14 @@
+import dynamic from 'next/dynamic';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import './styles.css';
 import { BOB } from '@builder-npm';
-import ProductTile from '../components/productTile';
 
 BOB.init('siema');
+
+const ProductTile = dynamic(
+  async () => (await import('../components/productTile')).default
+);
 
 BOB.registerComponent(ProductTile, {
   name: 'DEV-product-tile',
