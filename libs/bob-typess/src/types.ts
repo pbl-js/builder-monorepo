@@ -46,3 +46,9 @@ export interface ComponentOrder {
 }
 
 export type componentOrderType = ComponentOrder[];
+
+// Section
+export interface ISectionData {
+  name: string;
+  domData: DOMRect;
+}

@@ -1,8 +1,9 @@
-import { ICustomComponent } from './types';
+import { ICustomComponent, ISectionData } from './types';
 
 export enum PostMessageType {
   REGISTER_COMPONENT = 'register-component',
   RENDER_COMPONENT = 'render-component',
+  RENDER_SECTION = 'render-section',
 }
 
 export interface RegisterComponentPostMessage {
@@ -15,6 +16,12 @@ export interface RenderComponentPostMessage {
   messageData: string;
 }
 
+export interface RenderSectionPostMessage {
+  messageType: PostMessageType.RENDER_SECTION;
+  messageData: ISectionData;
+}
+
 export type PostMessage =
   | RegisterComponentPostMessage
+  | RenderSectionPostMessage
   | RenderComponentPostMessage;

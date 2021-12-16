@@ -8,4 +8,5 @@ export const MainWrapper = styled.div`
 
   background-color: ${bg_primary};
   color: ${tx_primary};
+  padding: 15px;
 `;

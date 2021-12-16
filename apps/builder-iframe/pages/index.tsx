@@ -20,23 +20,10 @@ export function Index() {
     <div className={styles.page}>
       <h2>Resources &amp; Tools</h2>
       <p>Thank you for using and showing some ♥ for Nx.</p>
-      <div className="flex github-star-container">
-        <a
-          href="https://github.com/nrwl/nx"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {' '}
-          If you like Nx, please give it a star:
-          <div className="github-star-badge">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/star.svg" className="material-icons" alt="" />
-            Star
-          </div>
-        </a>
-      </div>
+
       <p>Here are some links to help you get started.</p>
-      <ul className="resources">
+      <BuilderSection name="first-section" />
+      {/* <ul className="resources">
         <li className="col-span-2">
           <a
             className="resource flex"
@@ -101,7 +88,7 @@ nx affected:test
 # run e2e tests for current changes
 nx affected:e2e
 `}</pre>
-      </details>
+      </details> */}
     </div>
   );
 }
