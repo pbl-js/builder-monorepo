@@ -4,14 +4,17 @@ import { EditorHeader } from '../editorHeader/editorHeader';
 import EditorLeftColumn from '../editorLeftColumn/editorLeftColumn';
 import EditorRightColumn from '../editorRightColumn/editorRightColumn';
 import { WorkSection } from '../workSection/workSection';
+import { BobComponentsDataProvider } from './context/BobComponentsData/BobComponentsData.context';
 
 export const EditorPage = () => {
   return (
-    <Layout>
-      <EditorHeader />
-      <EditorLeftColumn />
-      <WorkSection />
-      <EditorRightColumn />
-    </Layout>
+    <BobComponentsDataProvider>
+      <Layout>
+        <EditorHeader />
+        <EditorLeftColumn />
+        <WorkSection />
+        <EditorRightColumn />
+      </Layout>
+    </BobComponentsDataProvider>
   );
 };

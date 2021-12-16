@@ -1,4 +1,8 @@
-import { PostMessage, PostMessageType } from '@bob-types';
+import {
+  PostMessage,
+  PostMessageType,
+  RegisterComponentPostMessage,
+} from '@bob-types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { IBobComponentsDataContext } from '../../context/BobComponentsData/BobComponentsData.types';
 
@@ -14,7 +18,9 @@ export const useGetBobDataFromIframe = (): {
     if (process.browser) {
       const receiveMessage = (event: MessageEvent<PostMessage>) => {
         if (event.data.messageType === PostMessageType.REGISTER_COMPONENT) {
-          console.log('siemanko');
+          const data = event.data
+            .messageData as unknown as RegisterComponentPostMessage;
+          console.log(data);
         }
       };
       window.addEventListener('message', receiveMessage, false);

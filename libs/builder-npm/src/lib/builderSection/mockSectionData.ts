@@ -1,4 +1,4 @@
-import { componentOrderType, ComponentType } from '@bob-types';
+import { componentOrderType, ComponentType } from '@bob-typess';
 
 export const mockSectionData: componentOrderType = [
   {

@@ -1,5 +1,5 @@
 import { RenderComponentsType } from '../../utils/renderComponents/types';
-import { ComponentOrder } from '@bob-types';
+import { ComponentOrder } from '@bob-typess';
 import styles from './builderWrapperComponent.module.css';
 
 const BuilderWrapperComponent: React.FC<{

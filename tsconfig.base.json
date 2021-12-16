@@ -15,8 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@bob-types": ["libs/bob-typess/src/index.ts"],
       "@builder-npm": ["libs/builder-npm/src/index.ts"],
-      "@bob-types": ["libs/bob-types/src/index.ts"]
+      "@bob-typess": ["libs/bob-typess/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -4,7 +4,7 @@ import {
   ICustomComponent,
   PostMessageType,
   RegisterComponentPostMessage,
-} from '@bob-types';
+} from '@bob-typess';
 
 interface CustomComponentInputs {
   name: string;
@@ -55,10 +55,13 @@ export class BOB {
 
           const newPostMessage: RegisterComponentPostMessage = {
             messageType: PostMessageType.REGISTER_COMPONENT,
-            messageData: componentToPush,
+            messageData: {
+              ...componentToPush,
+              jsxElement: 'elo',
+            },
           };
 
-          window.postMessage(newPostMessage, '*');
+          window.parent.postMessage(newPostMessage, '*');
         }
       }
     }
