@@ -4,6 +4,9 @@ import { colors } from '../../theme/consts';
 const { bg_secondary, light_accent } = colors;
 
 export const MainWrapper = styled.div`
+  position: relative;
+  z-index: 50;
+
   width: 100%;
   height: 70px;
   padding: 15px;

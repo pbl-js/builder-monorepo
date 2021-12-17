@@ -23,7 +23,7 @@ export function Index() {
 
       <p>Here are some links to help you get started.</p>
       <BuilderSection name="first-section" />
-      {/* <ul className="resources">
+      <ul className="resources">
         <li className="col-span-2">
           <a
             className="resource flex"
@@ -64,7 +64,6 @@ export function Index() {
       </ul>
       <h2>Next Steps</h2>
       <p>Here are some things you can do with Nx.</p>
-      <BuilderSection name="first-section" />
       <details open>
         <summary>Add UI library</summary>
         <pre>{`# Generate UI lib
@@ -88,7 +87,7 @@ nx affected:test
 # run e2e tests for current changes
 nx affected:e2e
 `}</pre>
-      </details> */}
+      </details>
     </div>
   );
 }

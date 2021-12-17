@@ -1,6 +1,7 @@
 import { ICustomComponent } from '@bob-types';
 import { MainWrapper } from './customComponentItem.style';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
+import { useGlobalUiDataState } from '../../modules/editorPage/context/GlobalUiData/GlobalUiData.hooks';
 
 const createCustomComponentSelector = (name: string) =>
   `#custom-component-button-${name}`;
@@ -14,12 +15,16 @@ export const CustomComponentItem = (props: Props): JSX.Element => {
     customComponent: { name },
   } = props;
 
+  const { setState } = useGlobalUiDataState();
+  console.log(setState);
+
   const onDragStart = (e: DraggableEvent, data: DraggableData) => {
     console.log(console.log(data));
+    setState((prev) => ({ ...prev, isDragging: true }));
   };
 
   return (
-    <Draggable onStart={onDragStart} onDrag={onDragStart}>
+    <Draggable onStart={onDragStart}>
       <MainWrapper id={createCustomComponentSelector(name)}>
         {name}fsd
       </MainWrapper>
