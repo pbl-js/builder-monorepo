@@ -1,30 +1,66 @@
 import { BuilderTextComponent } from '../../builderComponents/text/builderTextComponent';
-import { ComponentOrder, ComponentType } from '@bob-typess';
+import {
+  ComponentOrder,
+  ComponentType,
+  IDraftComponentData,
+} from '@bob-typess';
 import BuilderWrapperComponent from '../../builderComponents/wrapper/builderWrapperComponent';
+import { BOB } from '../bob';
 
-export const renderComponents = (components: ComponentOrder[]) => {
-  const componetsToRender = components.map((component) => {
-    if (component.componentType === ComponentType.WRAPPER)
-      return (
-        <BuilderWrapperComponent
-          key={component.componentId}
-          component={component}
-          renderComponents={renderComponents}
-        />
-      );
+type CurrentParrentType = 'section' | number;
 
-    if (component.componentType === ComponentType.TEXT)
-      return (
-        <BuilderTextComponent
-          key={component.componentId}
-          component={component}
-        />
-      );
+export const renderComponents = (
+  components: IDraftComponentData[],
+  currentParrent: CurrentParrentType
+) => {
+  // const componetsToRender = components.map((component) => {
+  //   if (component.componentType === ComponentType.WRAPPER)
+  //     return (
+  //       <BuilderWrapperComponent
+  //         key={component.componentId}
+  //         component={component}
+  //         renderComponents={renderComponents}
+  //       />
+  //     );
 
-    return (
-      <BuilderTextComponent key={component.componentId} component={component} />
-    );
+  //   if (component.componentType === ComponentType.TEXT)
+  //     return (
+  //       <BuilderTextComponent
+  //         key={component.componentId}
+  //         component={component}
+  //       />
+  //     );
+
+  //   if (component.componentType === ComponentType.CUSTOM) {
+  //     const matchComponent = BOB._customComponents.find((({name}) => component.));
+
+  //     return (
+  //       <BuilderTextComponent
+  //         key={component.componentId}
+  //         component={component}
+  //       />
+  //     );
+  //   }
+
+  //   return (
+  //     <BuilderTextComponent key={component.componentId} component={component} />
+  //   );
+  // });
+  const matchingComponents = components.filter(
+    ({ parentId }) => parentId === currentParrent
+  );
+
+  const componentsToRender = matchingComponents.map((component) => {
+    if (component.componentType === ComponentType.CUSTOM) {
+      const { jsxElement: Component } =
+        BOB._customComponents.find(({ name }) => component.jsxName === name) ||
+        {};
+
+      const props = component.data;
+
+      return Component && <Component {...props} />;
+    }
   });
 
-  return componetsToRender && componetsToRender.map((component) => component);
+  return componentsToRender && componentsToRender.map((component) => component);
 };

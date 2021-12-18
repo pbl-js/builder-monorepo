@@ -23,8 +23,12 @@ export const CustomComponentItem = (props: Props): JSX.Element => {
     setState((prev) => ({ ...prev, isDragging: true }));
   };
 
+  const onStop = (e: DraggableEvent, data: DraggableData) => {
+    setState((prev) => ({ ...prev, isDragging: false }));
+  };
+
   return (
-    <Draggable onStart={onDragStart}>
+    <Draggable onStart={onDragStart} onStop={onStop}>
       <MainWrapper id={createCustomComponentSelector(name)}>
         {name}fsd
       </MainWrapper>

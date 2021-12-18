@@ -33,8 +33,10 @@ export type ComponentStyles = Partial<{
 export interface ICustomComponent {
   componentType: ComponentType.CUSTOM;
   jsxElement: any;
-  style: ComponentStyles;
   name: string;
+  layerName: string;
+
+  style: ComponentStyles;
   data: BOBInputData[];
 }
 
@@ -47,8 +49,30 @@ export interface ComponentOrder {
 
 export type componentOrderType = ComponentOrder[];
 
+// ----------------------------------------------------------------------------------------
 // Section
+
+export interface IDraftComponentData {
+  id: number;
+  componentType: ComponentType.CUSTOM;
+  jsxName: string;
+  layerName: string;
+
+  parentId: 'section' | number | null;
+  style: ComponentStyles;
+  data: {
+    [key: string]: string | number;
+  };
+}
+
+export interface IDraftData {
+  id: number;
+  name: string;
+  components: IDraftComponentData[];
+}
 export interface ISectionData {
+  id: number;
   name: string;
   domData: DOMRect;
+  components: ICustomComponent[];
 }
