@@ -70,6 +70,7 @@ export interface IDraftData {
   name: string;
   components: IDraftComponentData[];
 }
+
 export interface ISectionData {
   id: number;
   name: string;
