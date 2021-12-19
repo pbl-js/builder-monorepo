@@ -1,23 +1,18 @@
 import {
-  IDraftData,
   PostMessageType_ToDashboard,
   PostMessage_ToDashboard_RenderSection,
 } from '@bob-types';
 import { useEffect } from 'react';
+import { useBuilderSectionData } from '../context/builderSectionData.hooks';
 
-export const useRenderBobSectionOnIframe = (
-  sectionName: string,
-  sectionData: IDraftData
-) => {
+export const useRenderBobSectionOnIframe = () => {
+  const { sectionData } = useBuilderSectionData();
+  const { name } = sectionData;
+
   useEffect(() => {
     const sectionDomData = document
-      .querySelector(`#bob-section-${sectionName}`)
+      .querySelector(`#bob-section-${name}`)
       ?.getBoundingClientRect();
-
-    console.log(
-      'PIŹDZISKO',
-      document.querySelector(`#bob-section-${sectionName}`)
-    );
 
     if (sectionDomData) {
       const newPostMessage: PostMessage_ToDashboard_RenderSection = {
@@ -28,8 +23,7 @@ export const useRenderBobSectionOnIframe = (
         },
       };
 
-      console.log('newpostmessage', newPostMessage);
       window.parent.postMessage(newPostMessage, '*');
     }
-  }, [sectionName]);
+  }, [sectionData, name]);
 };

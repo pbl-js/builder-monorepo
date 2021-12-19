@@ -4,31 +4,34 @@ import { renderComponents } from '../utils/renderComponents/renderComponents';
 import { useRenderBobSectionOnIframe } from './hooks/useRenderBobSectionOnIframe';
 import { BOB } from '../utils/bob';
 import { builderSectionDataReducer } from './reducer/builderSectionData.reducer';
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { BuilderSectionDataContextProvider } from './context/builderSectionData.context';
+import { useAddReciveMessageListener } from './hooks/useReceiveDataFromDashboard';
+import { BuilderSectionDataContext } from './context/builderSectionData.consts';
+import { BuilderSectionDataActionKindEnum } from './context/builderSectionData.types';
+import { useBuilderSectionData } from './context/builderSectionData.hooks';
 
 export interface BuilderSectionProps {
   name: string;
 }
 
-export function BuilderSection({ name }: BuilderSectionProps) {
-  const [sectionData, dispatch] = useReducer(
-    builderSectionDataReducer,
-    mockSectionData
-  );
-  const { components } = sectionData;
+function BuilderSectionInner({ name }: BuilderSectionProps) {
+  const {
+    sectionData: { components },
+  } = useBuilderSectionData();
 
-  useRenderBobSectionOnIframe(name, sectionData);
-  // const { jsxElement: JsxElement, data: componentProps } =
-  //   BOB._customComponents[0] || {};
+  useRenderBobSectionOnIframe();
+  useAddReciveMessageListener();
 
   return (
-    <BuilderSectionDataContextProvider state={sectionData} dispatch={dispatch}>
-      <div id={`bob-section-${name}`} className={styles['main-wrapper']}>
-        {/* <h1>Welcome to BuilderSection!</h1> */}
-        {/* {JsxElement && <JsxElement {...{ text: 'siema', price: 99 }} />} */}
-        {renderComponents(components, 'section')}
-      </div>
-    </BuilderSectionDataContextProvider>
+    <div id={`bob-section-${name}`} className={styles['main-wrapper']}>
+      {renderComponents(components, 'section')}
+    </div>
   );
 }
+
+export const BuilderSection = ({ name }: BuilderSectionProps) => (
+  <BuilderSectionDataContextProvider>
+    <BuilderSectionInner name={name} />
+  </BuilderSectionDataContextProvider>
+);

@@ -1,14 +1,21 @@
 import {
   AddComponentPayload,
   DeleteComponentPayload,
+  IDraftData,
   UpdateComponentPayload,
 } from '@bob-types';
 
 // Context
-export interface IBuilderSectionActionsContext {
-  addComponent: (data: AddComponentPayload) => void;
-  updateComponent: (data: UpdateComponentPayload) => void;
-  deleteComponent: (data: DeleteComponentPayload) => void;
+// export interface IBuilderSectionActionsContext {
+//   addComponent: (data: AddComponentPayload) => void;
+//   updateComponent: (data: UpdateComponentPayload) => void;
+//   deleteComponent: (data: DeleteComponentPayload) => void;
+//   dispatch: React.Dispatch<BuilderSectionDataAction>;
+// }
+
+export interface IBuilderSectionDataContext {
+  sectionData: IDraftData;
+  dispatch: React.Dispatch<BuilderSectionDataAction>;
 }
 
 // Reducer

@@ -1,4 +1,9 @@
-import { ICustomComponent } from '@bob-types';
+import {
+  ComponentType,
+  ICustomComponent,
+  PostMessageType_FromDashboard,
+  PostMessage_FromDashboard_AddComponent,
+} from '@bob-types';
 import { MainWrapper } from './customComponentItem.style';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import { useGlobalUiDataState } from '../../modules/editorPage/context/GlobalUiData/GlobalUiData.hooks';
@@ -16,15 +21,33 @@ export const CustomComponentItem = (props: Props): JSX.Element => {
   } = props;
 
   const { setState } = useGlobalUiDataState();
-  console.log(setState);
 
   const onDragStart = (e: DraggableEvent, data: DraggableData) => {
-    console.log(console.log(data));
     setState((prev) => ({ ...prev, isDragging: true }));
   };
 
   const onStop = (e: DraggableEvent, data: DraggableData) => {
     setState((prev) => ({ ...prev, isDragging: false }));
+
+    const newPostMessage: PostMessage_FromDashboard_AddComponent = {
+      messageType: PostMessageType_FromDashboard.ADD_COMPONENT,
+      messageData: {
+        componentData: {
+          id: 44,
+          componentType: ComponentType.CUSTOM,
+          jsxName: 'DEV-product-tile',
+          layerName: 'test',
+          parentId: 'section',
+          data: {
+            text: 'Pierwszy dodany przez panel',
+            price: 919,
+          },
+          style: { backgroundColor: 'blue' },
+        },
+      },
+    };
+    console.log('dashboard-wiadomość-do-wysyłki', newPostMessage);
+    window.frames[0].postMessage(newPostMessage, '*');
   };
 
   return (

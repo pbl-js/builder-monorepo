@@ -16,7 +16,7 @@ export function Index() {
       <p>Thank you for using and showing some ♥ for Nx.</p>
 
       <p>Here are some links to help you get started.</p>
-      <BuilderSection name="first-section" />
+      <BuilderSection name="home-banner" />
       <ul className="resources">
         <li className="col-span-2">
           <a

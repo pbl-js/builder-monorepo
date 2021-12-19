@@ -16,7 +16,6 @@ interface Props {
 
 export const BobSection = (props: Props) => {
   const { left, top, width, height } = props.sectionData.domData;
-  console.log(props);
   const style = { top, left, width, height };
 
   return <MainWrapper style={style}></MainWrapper>;
