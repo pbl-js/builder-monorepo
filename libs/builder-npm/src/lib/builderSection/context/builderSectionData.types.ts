@@ -1,4 +1,8 @@
-import { IDraftData } from '@bob-types';
+import {
+  AddComponentPayload,
+  DeleteComponentPayload,
+  UpdateComponentPayload,
+} from '@bob-types';
 
 // Context
 export interface IBuilderSectionActionsContext {
@@ -14,28 +18,14 @@ export enum BuilderSectionDataActionKindEnum {
   DELETE_COMPONENT = 'delete-component',
 }
 
-export interface AddComponentPayload {
-  componentData: IDraftData;
-  parentId: 'section' | number;
-}
-
 export interface BuilderSectionDataAction_AddComponent {
   type: BuilderSectionDataActionKindEnum.ADD_COMPONENT;
   payload: AddComponentPayload;
 }
 
-export interface DeleteComponentPayload {
-  componentId: number;
-}
-
 export interface BuilderSectionDataAction_DeleteComponent {
   type: BuilderSectionDataActionKindEnum.DELETE_COMPONENT;
   payload: DeleteComponentPayload;
-}
-
-export interface UpdateComponentPayload {
-  componentId: number;
-  componentData: IDraftData;
 }
 
 export interface BuilderSectionDataAction_UpdateComponent {

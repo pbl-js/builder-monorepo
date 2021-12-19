@@ -1,8 +1,8 @@
 import {
-  PostMessage,
-  PostMessageType,
-  RegisterComponentPostMessage,
-  RenderSectionPostMessage,
+  PostMessage_ToDashboard,
+  PostMessageType_ToDashboard,
+  PostMessage_ToDashboard_Registercomponent,
+  PostMessage_ToDashboard_RenderSection,
 } from '@bob-types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { IBobComponentsDataContext } from '../../context/BobComponentsData/BobComponentsData.types';
@@ -20,9 +20,13 @@ export const useGetBobDataFromIframe = (): {
 
   useEffect(() => {
     if (process.browser) {
-      const receiveMessage = (event: MessageEvent<PostMessage>) => {
-        if (event.data.messageType === PostMessageType.REGISTER_COMPONENT) {
-          const data = event.data as unknown as RegisterComponentPostMessage;
+      const receiveMessage = (event: MessageEvent<PostMessage_ToDashboard>) => {
+        if (
+          event.data.messageType ===
+          PostMessageType_ToDashboard.REGISTER_COMPONENT
+        ) {
+          const data =
+            event.data as unknown as PostMessage_ToDashboard_Registercomponent;
 
           setState((prevState) => {
             const newCustomComponents = prevState.customComponents.map(
@@ -36,8 +40,11 @@ export const useGetBobDataFromIframe = (): {
           });
         }
 
-        if (event.data.messageType === PostMessageType.RENDER_SECTION) {
-          const data = event.data as unknown as RenderSectionPostMessage;
+        if (
+          event.data.messageType === PostMessageType_ToDashboard.RENDER_SECTION
+        ) {
+          const data =
+            event.data as unknown as PostMessage_ToDashboard_RenderSection;
 
           setState((prevState) => {
             const newSections = prevState.sections.map((section) => section);

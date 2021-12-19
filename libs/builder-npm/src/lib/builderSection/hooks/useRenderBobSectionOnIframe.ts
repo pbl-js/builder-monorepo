@@ -1,17 +1,22 @@
-import { PostMessageType, RenderSectionPostMessage } from '@bob-types';
+import {
+  IDraftData,
+  PostMessageType_ToDashboard,
+  PostMessage_ToDashboard_RenderSection,
+} from '@bob-types';
 import { useEffect } from 'react';
 
-export const useRenderBobSectionOnIframe = (name: string) => {
+export const useRenderBobSectionOnIframe = (sectionData: IDraftData) => {
+  const { name } = sectionData;
   useEffect(() => {
     const sectionDomData = document
       .querySelector(`#bob-section-${name}`)
       ?.getBoundingClientRect();
 
     if (sectionDomData) {
-      const newPostMessage: RenderSectionPostMessage = {
-        messageType: PostMessageType.RENDER_SECTION,
+      const newPostMessage: PostMessage_ToDashboard_RenderSection = {
+        messageType: PostMessageType_ToDashboard.RENDER_SECTION,
         messageData: {
-          name,
+          ...sectionData,
           domData: sectionDomData,
         },
       };

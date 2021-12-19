@@ -74,6 +74,6 @@ export interface IDraftData {
 export interface ISectionData {
   id: number;
   name: string;
-  domData: DOMRect;
   components: ICustomComponent[];
+  domData: DOMRect;
 }

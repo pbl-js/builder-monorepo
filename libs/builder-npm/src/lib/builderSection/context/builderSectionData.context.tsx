@@ -1,24 +1,23 @@
-import { useReducer } from 'react';
-import { mockSectionData } from '../mockSectionData';
+import {
+  AddComponentPayload,
+  DeleteComponentPayload,
+  IDraftData,
+  UpdateComponentPayload,
+} from '@bob-types';
 import {
   BuilderSectionActionsContext,
   BuilderSectionDataContext,
 } from './builderSectionData.consts';
-import { builderSectionDataReducer } from './builderSectionData.reducer';
 import {
-  AddComponentPayload,
+  BuilderSectionDataAction,
   BuilderSectionDataActionKindEnum,
-  DeleteComponentPayload,
   IBuilderSectionActionsContext,
-  UpdateComponentPayload,
 } from './builderSectionData.types';
 
-export const BuilderSectionDataContextProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(
-    builderSectionDataReducer,
-    mockSectionData
-  );
-
+export const BuilderSectionDataContextProvider: React.FC<{
+  state: IDraftData;
+  dispatch: React.Dispatch<BuilderSectionDataAction>;
+}> = ({ children, state, dispatch }) => {
   const addComponent = (data: AddComponentPayload) => {
     dispatch({
       type: BuilderSectionDataActionKindEnum.ADD_COMPONENT,

@@ -2,8 +2,8 @@ import {
   BOBInputData,
   ComponentType,
   ICustomComponent,
-  PostMessageType,
-  RegisterComponentPostMessage,
+  PostMessageType_ToDashboard,
+  PostMessage_ToDashboard_Registercomponent,
 } from '@bob-typess';
 
 interface CustomComponentInputs {
@@ -47,14 +47,15 @@ export class BOB {
             componentType: ComponentType.CUSTOM,
             jsxElement: component,
             name: componentData.name,
+            layerName: componentData.name,
             data: componentData.inputs,
             style: {},
           };
 
           this._customComponents.push(componentToPush);
 
-          const newPostMessage: RegisterComponentPostMessage = {
-            messageType: PostMessageType.REGISTER_COMPONENT,
+          const newPostMessage: PostMessage_ToDashboard_Registercomponent = {
+            messageType: PostMessageType_ToDashboard.REGISTER_COMPONENT,
             messageData: {
               ...componentToPush,
               jsxElement: 'elo',
