@@ -3,7 +3,7 @@ import { mockSectionData } from './mockSectionData';
 import { renderComponents } from '../utils/renderComponents/renderComponents';
 import { useRenderBobSectionOnIframe } from './hooks/useRenderBobSectionOnIframe';
 import { BOB } from '../utils/bob';
-import { builderSectionDataReducer } from './context/builderSectionData.reducer';
+import { builderSectionDataReducer } from './reducer/builderSectionData.reducer';
 import { useReducer } from 'react';
 import { BuilderSectionDataContextProvider } from './context/builderSectionData.context';
 

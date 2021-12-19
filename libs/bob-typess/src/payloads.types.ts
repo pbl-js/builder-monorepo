@@ -1,4 +1,4 @@
-import { IDraftData } from '@bob-types';
+import { IDraftComponentData, IDraftData } from '@bob-types';
 
 export interface UpdateComponentPayload {
   componentId: number;
@@ -10,6 +10,5 @@ export interface DeleteComponentPayload {
 }
 
 export interface AddComponentPayload {
-  componentData: IDraftData;
-  parentId: 'section' | number;
+  componentData: IDraftComponentData;
 }
