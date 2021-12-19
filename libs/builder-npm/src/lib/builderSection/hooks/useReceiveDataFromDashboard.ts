@@ -8,7 +8,6 @@ import { useBuilderSectionData } from '../context/builderSectionData.hooks';
 import { BuilderSectionDataActionKindEnum } from '../context/builderSectionData.types';
 
 export const useAddReciveMessageListener = () => {
-  // const dispatch = useBuilderSectionActions();
   const { dispatch } = useBuilderSectionData();
 
   useEffect(() => {
