@@ -3,7 +3,7 @@ import {
   DeleteComponentPayload,
   UpdateComponentPayload,
 } from './payloads.types';
-import { ICustomComponent, ISectionData } from './types';
+import { ICustomComponent, IDraftData } from './types';
 
 export enum PostMessageType_ToDashboard {
   REGISTER_COMPONENT = 'register-component',
@@ -23,7 +23,7 @@ export interface PostMessage_ToDashboard_RenderComponent {
 
 export interface PostMessage_ToDashboard_RenderSection {
   messageType: PostMessageType_ToDashboard.RENDER_SECTION;
-  messageData: ISectionData;
+  messageData: IDraftData;
 }
 
 export type PostMessage_ToDashboard =

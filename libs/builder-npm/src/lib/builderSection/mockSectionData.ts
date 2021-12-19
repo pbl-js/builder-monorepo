@@ -1,9 +1,4 @@
-import {
-  componentOrderType,
-  ComponentType,
-  IDraftData,
-  ISectionData,
-} from '@bob-typess';
+import { ComponentType, IDraftData } from '@bob-typess';
 
 // export const mockSectionData: componentOrderType = [
 //   {

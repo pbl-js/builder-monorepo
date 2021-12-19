@@ -1,26 +1,29 @@
 import styles from './builderSection.module.css';
 import { mockSectionData } from './mockSectionData';
 import { renderComponents } from '../utils/renderComponents/renderComponents';
-import { BuilderSectionProps } from './builderSection.types';
 import { useRenderBobSectionOnIframe } from './hooks/useRenderBobSectionOnIframe';
 import { BOB } from '../utils/bob';
 import { builderSectionDataReducer } from './context/builderSectionData.reducer';
 import { useReducer } from 'react';
 import { BuilderSectionDataContextProvider } from './context/builderSectionData.context';
 
+export interface BuilderSectionProps {
+  name: string;
+}
+
 export function BuilderSection({ name }: BuilderSectionProps) {
-  const [state, dispatch] = useReducer(
+  const [sectionData, dispatch] = useReducer(
     builderSectionDataReducer,
     mockSectionData
   );
-  const { components } = state;
+  const { components } = sectionData;
 
-  useRenderBobSectionOnIframe(name);
+  useRenderBobSectionOnIframe(name, sectionData);
   // const { jsxElement: JsxElement, data: componentProps } =
   //   BOB._customComponents[0] || {};
 
   return (
-    <BuilderSectionDataContextProvider state={state} dispatch={dispatch}>
+    <BuilderSectionDataContextProvider state={sectionData} dispatch={dispatch}>
       <div id={`bob-section-${name}`} className={styles['main-wrapper']}>
         {/* <h1>Welcome to BuilderSection!</h1> */}
         {/* {JsxElement && <JsxElement {...{ text: 'siema', price: 99 }} />} */}

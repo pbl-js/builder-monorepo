@@ -1,6 +1,6 @@
-import { ICustomComponent, ISectionData } from '@bob-types';
+import { ICustomComponent, IDraftData } from '@bob-types';
 
 export interface IBobComponentsDataContext {
   customComponents: ICustomComponent[];
-  sections: ISectionData[];
+  sections: IDraftData[];
 }

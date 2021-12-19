@@ -57,6 +57,7 @@ export interface IDraftComponentData {
   componentType: ComponentType.CUSTOM;
   jsxName: string;
   layerName: string;
+  domData?: DOMRect;
 
   parentId: 'section' | number | null;
   style: ComponentStyles;
@@ -68,12 +69,13 @@ export interface IDraftComponentData {
 export interface IDraftData {
   id: number;
   name: string;
+  domData?: DOMRect;
   components: IDraftComponentData[];
 }
 
-export interface ISectionData {
-  id: number;
-  name: string;
-  components: ICustomComponent[];
-  domData: DOMRect;
-}
+// export interface ISectionData {
+//   id: number;
+//   name: string;
+//   components: ICustomComponent[];
+//   domData: DOMRect;
+// }

@@ -5,12 +5,19 @@ import {
 } from '@bob-types';
 import { useEffect } from 'react';
 
-export const useRenderBobSectionOnIframe = (sectionData: IDraftData) => {
-  const { name } = sectionData;
+export const useRenderBobSectionOnIframe = (
+  sectionName: string,
+  sectionData: IDraftData
+) => {
   useEffect(() => {
     const sectionDomData = document
-      .querySelector(`#bob-section-${name}`)
+      .querySelector(`#bob-section-${sectionName}`)
       ?.getBoundingClientRect();
+
+    console.log(
+      'PIŹDZISKO',
+      document.querySelector(`#bob-section-${sectionName}`)
+    );
 
     if (sectionDomData) {
       const newPostMessage: PostMessage_ToDashboard_RenderSection = {
@@ -21,7 +28,8 @@ export const useRenderBobSectionOnIframe = (sectionData: IDraftData) => {
         },
       };
 
+      console.log('newpostmessage', newPostMessage);
       window.parent.postMessage(newPostMessage, '*');
     }
-  }, [name]);
+  }, [sectionName]);
 };

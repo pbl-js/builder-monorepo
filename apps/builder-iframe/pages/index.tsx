@@ -9,12 +9,6 @@ export function Index() {
    *
    * Note: The corresponding styles are in the ./index.scss file.
    */
-  useEffect(() => {
-    setTimeout(
-      () => console.log('Zawartość singletona', BOB._customComponents),
-      1000
-    );
-  }, [BOB]);
 
   return (
     <div className={styles.page}>

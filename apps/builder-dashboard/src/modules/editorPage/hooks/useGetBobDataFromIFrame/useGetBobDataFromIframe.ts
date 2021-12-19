@@ -21,6 +21,7 @@ export const useGetBobDataFromIframe = (): {
   useEffect(() => {
     if (process.browser) {
       const receiveMessage = (event: MessageEvent<PostMessage_ToDashboard>) => {
+        console.log('received message', event.data.messageType);
         if (
           event.data.messageType ===
           PostMessageType_ToDashboard.REGISTER_COMPONENT
