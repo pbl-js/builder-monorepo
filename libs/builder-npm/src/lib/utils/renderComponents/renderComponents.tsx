@@ -1,12 +1,12 @@
-import { BuilderTextComponent } from '../../builderComponents/text/builderTextComponent';
+import { BuilderTextComponent } from '../../builderComponents/textComponent/builderTextComponent';
 import {
   ComponentOrder,
   ComponentType,
   IDraftComponentData,
 } from '@bob-typess';
-import BuilderWrapperComponent from '../../builderComponents/wrapper/builderWrapperComponent';
+import BuilderWrapperComponent from '../../builderComponents/wrapperComponent/builderWrapperComponent';
 import { BOB } from '../bob';
-import { BuilderComponentCustom } from '../../builderComponents/custom/BuilderComponentCustom';
+import { BuilderComponentCustom } from '../../builderComponents/customComponent/BuilderComponentCustom';
 
 type CurrentParrentType = 'section' | number;
 

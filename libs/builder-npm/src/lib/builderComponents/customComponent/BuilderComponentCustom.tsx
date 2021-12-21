@@ -1,5 +1,6 @@
 import { IDraftComponentData } from '@bob-types';
 import { BOB } from '@builder-npm';
+import { BuilderComponentCommonWrapper } from '../commonWrapper/BuilderComponentCommonWrapper';
 
 interface Props {
   componentData: IDraftComponentData;
@@ -7,11 +8,15 @@ interface Props {
 
 export const BuilderComponentCustom = ({
   componentData,
-}: Props): JSX.Element => {
+}: Props): JSX.Element | null => {
   const { jsxName, data } = componentData;
 
   const { jsxElement: Component } =
     BOB._customComponents.find(({ name }) => jsxName === name) || {};
 
-  return Component && <Component {...data} />;
+  return Component ? (
+    <BuilderComponentCommonWrapper componentData={componentData}>
+      <Component {...data} />
+    </BuilderComponentCommonWrapper>
+  ) : null;
 };
