@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BobSection } from '../BobSection/BobSection';
+import { BobSection } from '../../components/layout/BobSection/BobSection';
 import { useBobComponentsData } from '../editorPage/context/BobComponentsData/BobComponentsData.hooks';
 import { useGlobalUiDataState } from '../editorPage/context/GlobalUiData/GlobalUiData.hooks';
 

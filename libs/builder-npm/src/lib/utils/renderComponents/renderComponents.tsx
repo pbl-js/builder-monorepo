@@ -3,17 +3,16 @@ import {
   ComponentOrder,
   ComponentType,
   IDraftComponentData,
+  RenderComponentsProps,
 } from '@bob-typess';
 import BuilderWrapperComponent from '../../builderComponents/wrapperComponent/builderWrapperComponent';
 import { BOB } from '../bob';
 import { BuilderComponentCustom } from '../../builderComponents/customComponent/BuilderComponentCustom';
 
-type CurrentParrentType = 'section' | number;
-
-export const renderComponents = (
-  components: IDraftComponentData[],
-  currentParrent: CurrentParrentType
-) => {
+export const renderComponents = ({
+  components,
+  currentParrent,
+}: RenderComponentsProps) => {
   const matchingComponents = components.filter(
     ({ parentId }) => parentId === currentParrent
   );

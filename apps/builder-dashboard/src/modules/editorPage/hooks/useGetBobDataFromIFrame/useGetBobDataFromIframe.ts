@@ -55,6 +55,20 @@ export const useGetBobDataFromIframe = (): {
             };
           });
         }
+
+        if (
+          event.data.messageType ===
+          PostMessageType_ToDashboard.SEND_COMPONENT_DOM_DATA
+        ) {
+          // const data = event.data.messageData.;
+          // setState((prevState) => {
+          //   const prevComponents = prevState.
+          //   return {
+          //     ...prevState,
+          //     sections: [...newSections, data.messageData],
+          //   };
+          // });
+        }
       };
       window.addEventListener('message', receiveMessage, false);
     }

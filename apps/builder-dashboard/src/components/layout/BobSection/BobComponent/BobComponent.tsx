@@ -1,4 +1,4 @@
-import { IDraftData } from '@bob-types';
+import { IDraftComponentData, IDraftData } from '@bob-types';
 import styled from 'styled-components';
 
 const MainWrapper = styled.div`
@@ -11,11 +11,11 @@ const MainWrapper = styled.div`
 `;
 
 interface Props {
-  sectionData: IDraftData;
+  componentData: IDraftComponentData;
 }
 
-export const BobSection = (props: Props) => {
-  const { left, top, width, height } = props.sectionData.domData;
+export const BobComponent = ({ componentData }: Props) => {
+  const { left, top, width, height } = componentData.domData || {};
   const style = { top, left, width, height };
 
   return <MainWrapper style={style}></MainWrapper>;

@@ -26,7 +26,7 @@ function BuilderSectionInner({ name }: BuilderSectionProps) {
   return (
     <div id={`bob-section-${name}`} className={styles['main-wrapper']}>
       <h1>{name}</h1>
-      {renderComponents(components, 'section')}
+      {renderComponents({ components, currentParrent: 'section' })}
     </div>
   );
 }
