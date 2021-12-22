@@ -1,5 +1,5 @@
 import { IDraftComponentData } from '@bob-types';
-import { BOB } from '@builder-npm';
+import { BOB } from '../../utils/bob';
 import { BuilderComponentCommonWrapper } from '../commonWrapper/BuilderComponentCommonWrapper';
 
 interface Props {

@@ -1,9 +1,11 @@
 import { createContext } from 'react';
 import { IBobComponentsDataContext } from './BobComponentsData.types';
 
-export const initialState: IBobComponentsDataContext = {
+export const bobComponentsDataContextInitialState: IBobComponentsDataContext = {
   customComponents: [],
-  sections: [],
+  activeDraft: null,
 };
 
-export const BobComponentsDataContext = createContext(initialState);
+export const BobComponentsDataContext = createContext(
+  bobComponentsDataContextInitialState
+);

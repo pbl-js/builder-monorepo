@@ -4,7 +4,7 @@ import { renderComponents } from '../utils/renderComponents/renderComponents';
 import { useRenderBobSectionOnIframe } from './hooks/useRenderBobSectionOnIframe';
 import { BOB } from '../utils/bob';
 import { builderSectionDataReducer } from './reducer/builderSectionData.reducer';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import { BuilderSectionDataContextProvider } from './context/builderSectionData.context';
 import { useAddReciveMessageListener } from './hooks/useReceiveDataFromDashboard';
 import { BuilderSectionDataContext } from './context/builderSectionData.consts';
@@ -16,15 +16,17 @@ export interface BuilderSectionProps {
 }
 
 function BuilderSectionInner({ name }: BuilderSectionProps) {
+  const ref = useRef(null);
+
   const {
     sectionData: { components, name: sectionName },
   } = useBuilderSectionData();
 
-  useRenderBobSectionOnIframe();
+  useRenderBobSectionOnIframe(ref);
   useAddReciveMessageListener();
 
   return (
-    <div id={`bob-section-${name}`} className={styles['main-wrapper']}>
+    <div ref={ref} className={styles['main-wrapper']}>
       <h1>{name}</h1>
       {renderComponents({ components, currentParrent: 'section' })}
     </div>

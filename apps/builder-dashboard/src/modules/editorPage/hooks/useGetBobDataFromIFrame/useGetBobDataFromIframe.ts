@@ -3,6 +3,7 @@ import {
   PostMessageType_ToDashboard,
   PostMessage_ToDashboard_Registercomponent,
   PostMessage_ToDashboard_RenderSection,
+  IDraftComponentData,
 } from '@bob-types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { IBobComponentsDataContext } from '../../context/BobComponentsData/BobComponentsData.types';
@@ -13,7 +14,7 @@ export const useGetBobDataFromIframe = (): {
 } => {
   const [state, setState] = useState<IBobComponentsDataContext>({
     customComponents: [],
-    sections: [],
+    activeDraft: null,
   });
 
   console.log('zawartość contextu', state);
@@ -21,6 +22,7 @@ export const useGetBobDataFromIframe = (): {
   useEffect(() => {
     if (process.browser) {
       const receiveMessage = (event: MessageEvent<PostMessage_ToDashboard>) => {
+        console.log(event.data.messageType);
         if (
           event.data.messageType ===
           PostMessageType_ToDashboard.REGISTER_COMPONENT
@@ -47,11 +49,9 @@ export const useGetBobDataFromIframe = (): {
             event.data as unknown as PostMessage_ToDashboard_RenderSection;
 
           setState((prevState) => {
-            const newSections = prevState.sections.map((section) => section);
-
             return {
               ...prevState,
-              sections: [...newSections, data.messageData],
+              activeDraft: data.messageData,
             };
           });
         }
@@ -60,14 +60,33 @@ export const useGetBobDataFromIframe = (): {
           event.data.messageType ===
           PostMessageType_ToDashboard.SEND_COMPONENT_DOM_DATA
         ) {
-          // const data = event.data.messageData.;
-          // setState((prevState) => {
-          //   const prevComponents = prevState.
-          //   return {
-          //     ...prevState,
-          //     sections: [...newSections, data.messageData],
-          //   };
-          // });
+          const { id, domData } = event.data.messageData;
+          const componentToUpdate = state.activeDraft?.components.find(
+            (component) => component.id === id
+          );
+
+          setState((prevState) => {
+            if (componentToUpdate && domData && prevState.activeDraft) {
+              const updatedComponent: IDraftComponentData = domData && {
+                ...componentToUpdate,
+                domData,
+              };
+
+              const updatedComponents: IDraftComponentData[] = [
+                ...prevState.activeDraft?.components,
+                updatedComponent,
+              ];
+
+              return {
+                ...prevState,
+                activeDraft: {
+                  ...prevState.activeDraft,
+                  components: updatedComponents,
+                },
+              };
+            }
+            return prevState;
+          });
         }
       };
       window.addEventListener('message', receiveMessage, false);

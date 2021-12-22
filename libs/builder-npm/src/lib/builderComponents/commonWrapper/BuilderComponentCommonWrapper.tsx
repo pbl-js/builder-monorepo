@@ -1,4 +1,5 @@
 import { IDraftComponentData } from '@bob-types';
+import { useRef } from 'react';
 import { useSendComponentDataToDashboard } from '../../builderSection/hooks/useSendComponentDataToDashboard';
 import { COMPONENT_SELECTOR } from '../../consts';
 
@@ -11,8 +12,10 @@ export const BuilderComponentCommonWrapper = ({
   componentData,
   children,
 }: Props) => {
-  const { id } = componentData;
-  const data = useSendComponentDataToDashboard(componentData);
+  const ref = useRef<HTMLDivElement>(null);
 
-  return <div id={`${COMPONENT_SELECTOR}${id}`}>{children}</div>;
+  const { id } = componentData;
+  useSendComponentDataToDashboard(componentData, ref);
+
+  return <div ref={ref}>{children}</div>;
 };

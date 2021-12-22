@@ -15,13 +15,11 @@ const CoverLayer = styled.div`
 
 export const ShadowLayer = (): JSX.Element => {
   const { isDragging } = useGlobalUiDataState();
-  const { sections } = useBobComponentsData();
+  const { activeDraft } = useBobComponentsData();
   return (
     <>
       {isDragging && <CoverLayer />}
-      {sections.map((section) => (
-        <BobSection key={section.name} sectionData={section} />
-      ))}
+      {activeDraft && <BobSection sectionData={activeDraft} />}
     </>
   );
 };
