@@ -1,8 +1,7 @@
-import { IDraftComponentData, IDraftData } from '@bob-types';
+import { IDraftComponentData } from './types';
 
 export interface UpdateComponentPayload {
-  componentId: number;
-  componentData: IDraftData;
+  componentData: IDraftComponentData;
 }
 
 export interface DeleteComponentPayload {

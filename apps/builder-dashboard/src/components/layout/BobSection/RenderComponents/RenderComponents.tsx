@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const RenderComponents = ({ components }: Props): JSX.Element => {
-  console.log(components);
   return (
     <>
       {components.map((component) => (

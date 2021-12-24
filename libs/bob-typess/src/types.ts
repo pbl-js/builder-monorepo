@@ -30,6 +30,11 @@ export type ComponentStyles = Partial<{
   borderColor: string;
 }>;
 
+export type BobRect = Pick<
+  DOMRectReadOnly,
+  'x' | 'y' | 'top' | 'left' | 'right' | 'bottom' | 'height' | 'width'
+>;
+
 export interface ICustomComponent {
   componentType: ComponentType.CUSTOM;
   jsxElement: any;
@@ -57,7 +62,7 @@ export interface IDraftComponentData {
   componentType: ComponentType.CUSTOM;
   jsxName: string;
   layerName: string;
-  domData?: DOMRect;
+  domData?: BobRect;
 
   parentId: 'section' | number | null;
   style: ComponentStyles;

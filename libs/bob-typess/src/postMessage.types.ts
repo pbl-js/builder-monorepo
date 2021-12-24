@@ -3,7 +3,13 @@ import {
   DeleteComponentPayload,
   UpdateComponentPayload,
 } from './payloads.types';
-import { ICustomComponent, IDraftComponentData, IDraftData } from './types';
+import { ComponentRectData } from './renderComponents.types';
+import {
+  BobRect,
+  ICustomComponent,
+  IDraftComponentData,
+  IDraftData,
+} from './types';
 
 export enum PostMessageType_ToDashboard {
   REGISTER_COMPONENT = 'register-component',
@@ -18,7 +24,7 @@ export interface PostMessage_ToDashboard_Registercomponent {
 
 export interface PostMessage_ToDashboard_SendComponentDomData {
   messageType: PostMessageType_ToDashboard.SEND_COMPONENT_DOM_DATA;
-  messageData: IDraftComponentData;
+  messageData: ComponentRectData;
 }
 
 export interface PostMessage_ToDashboard_RenderSection {

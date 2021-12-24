@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const BobSection = ({ sectionData }: Props) => {
-  const { left, top, width, height } = sectionData.domData;
+  const { left, top, width, height } = sectionData.domData || {};
   const style = { top, left, width, height };
 
   const { components } = sectionData;

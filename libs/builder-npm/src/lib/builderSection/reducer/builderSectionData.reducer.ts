@@ -4,6 +4,7 @@ import {
   BuilderSectionDataActionKindEnum,
 } from '../context/builderSectionData.types';
 import { addComponentAction } from './addComponent';
+import { updateComponentAction } from './updateComponent';
 
 export const builderSectionDataReducer = (
   state: IDraftData,
@@ -20,7 +21,7 @@ export const builderSectionDataReducer = (
   }
 
   if (type === BuilderSectionDataActionKindEnum.UPDATE_COMPONENT) {
-    return { ...state };
+    return updateComponentAction(state, action.payload);
   }
 
   return state;

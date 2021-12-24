@@ -3,7 +3,7 @@ import {
   PostMessageType_ToDashboard,
   PostMessage_ToDashboard_Registercomponent,
   PostMessage_ToDashboard_RenderSection,
-  IDraftComponentData,
+  ComponentRectData,
 } from '@bob-types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { IBobComponentsDataContext } from '../../context/BobComponentsData/BobComponentsData.types';
@@ -15,14 +15,12 @@ export const useGetBobDataFromIframe = (): {
   const [state, setState] = useState<IBobComponentsDataContext>({
     customComponents: [],
     activeDraft: null,
+    componentsDomData: [],
   });
-
-  console.log('zawartość contextu', state);
-
+  console.log(state);
   useEffect(() => {
     if (process.browser) {
       const receiveMessage = (event: MessageEvent<PostMessage_ToDashboard>) => {
-        console.log(event.data.messageType);
         if (
           event.data.messageType ===
           PostMessageType_ToDashboard.REGISTER_COMPONENT
@@ -60,32 +58,17 @@ export const useGetBobDataFromIframe = (): {
           event.data.messageType ===
           PostMessageType_ToDashboard.SEND_COMPONENT_DOM_DATA
         ) {
-          const { id, domData } = event.data.messageData;
-          const componentToUpdate = state.activeDraft?.components.find(
-            (component) => component.id === id
-          );
+          const incomingComponent = event.data.messageData;
 
           setState((prevState) => {
-            if (componentToUpdate && domData && prevState.activeDraft) {
-              const updatedComponent: IDraftComponentData = domData && {
-                ...componentToUpdate,
-                domData,
-              };
+            const restComponents = prevState.componentsDomData.filter(
+              ({ componentId }) => componentId !== incomingComponent.componentId
+            );
 
-              const updatedComponents: IDraftComponentData[] = [
-                ...prevState.activeDraft?.components,
-                updatedComponent,
-              ];
-
-              return {
-                ...prevState,
-                activeDraft: {
-                  ...prevState.activeDraft,
-                  components: updatedComponents,
-                },
-              };
-            }
-            return prevState;
+            return {
+              ...prevState,
+              componentsDomData: [...restComponents, incomingComponent],
+            };
           });
         }
       };
