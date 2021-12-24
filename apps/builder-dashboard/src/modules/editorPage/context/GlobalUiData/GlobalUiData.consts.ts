@@ -3,6 +3,7 @@ import { IGlobalUiDataContext } from './GlobalUiData.types';
 
 export const globalUiDataInitialState: IGlobalUiDataContext = {
   isDragging: false,
+  activeComponents: [],
   setState: () => '',
 };
 

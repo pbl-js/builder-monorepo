@@ -1,23 +1,32 @@
 import { IDraftComponentData, IDraftData } from '@bob-types';
-import styled from 'styled-components';
+import { useGlobalUiDataState } from '../../../../modules/editorPage/context/GlobalUiData/GlobalUiData.hooks';
+import styled, { css } from 'styled-components';
 import { useBobComponentsData } from '../../../../modules/editorPage/context/BobComponentsData/BobComponentsData.hooks';
 import EditableMargin from './EditableMargin';
 
-const MainWrapper = styled.div`
+interface MainWrapper_SC {
+  isActive: boolean;
+}
+
+const MainWrapper = styled.div<MainWrapper_SC>`
   position: relative;
   z-index: 10;
 
-  /* TODO: Wydziel ten kod */
-  &::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    content: '';
-    width: 100%;
-    height: 100%;
-    border: 1px solid hsl(204, 100%, 50%);
-  }
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      /* TODO: Wydziel ten kod */
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        content: '';
+        width: 100%;
+        height: 100%;
+        border: 1px solid hsl(204, 100%, 50%);
+      }
+    `}
 `;
 
 interface Props {
@@ -25,9 +34,16 @@ interface Props {
 }
 export const BobComponent = ({ componentData }: Props) => {
   const { componentsDomData } = useBobComponentsData();
+  const { setState, activeComponents } = useGlobalUiDataState();
 
   const matchDomData = componentsDomData.find(
     ({ componentId }) => componentId === componentData.id
+  );
+
+  const isComponentActive = Boolean(
+    activeComponents.find(
+      (activeComponentId) => activeComponentId === componentData.id
+    ) && matchDomData
   );
 
   const { width, height = 0, left, top } = matchDomData?.domData || {};
@@ -46,22 +62,32 @@ export const BobComponent = ({ componentData }: Props) => {
     marginRight: s_marginRight = 0,
   } = style;
 
-  console.log(
-    'id: ',
-    componentData.id,
-    'margin-top: ',
-    s_marginTop,
-    'margin-bottom: ',
-    s_marginBottom
-  );
+  const onClick = () => {
+    // TODO: Handle select multiple component with shift
+    setState((prevState) => {
+      return {
+        ...prevState,
+        activeComponents: [componentData.id],
+      };
+    });
+  };
+
   return (
     <MainWrapper
-      style={{ height, marginTop: s_marginTop, marginBottom: s_marginBottom }}
+      isActive={isComponentActive}
+      onClick={onClick}
+      style={{
+        height,
+        marginTop: s_marginTop,
+        marginBottom: s_marginBottom,
+        marginLeft: s_marginLeft,
+        marginRight: s_marginRight,
+      }}
     >
-      {matchDomData && (
+      {isComponentActive && matchDomData && (
         <EditableMargin
           componentStyle={style}
-          rectData={matchDomData?.domData}
+          rectData={matchDomData.domData}
         />
       )}
     </MainWrapper>
