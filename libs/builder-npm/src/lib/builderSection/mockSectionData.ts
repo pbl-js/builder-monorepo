@@ -56,7 +56,7 @@ export const mockSectionData: IDraftData = {
         text: 'Pierwszy komponent za płotent',
         price: 9999,
       },
-      style: { backgroundColor: 'blue' },
+      style: { paddingTop: '20px', paddingBottom: '20px' },
     },
     {
       id: 2,
@@ -68,7 +68,7 @@ export const mockSectionData: IDraftData = {
         text: 'Drugi komponent śmiga elegancko',
         price: 327,
       },
-      style: { backgroundColor: 'blue' },
+      style: {},
     },
   ],
 };

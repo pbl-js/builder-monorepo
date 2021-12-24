@@ -19,6 +19,7 @@ export const renderComponents = ({
 
   const componentsToRender = matchingComponents.map((component) => {
     if (component.componentType === ComponentType.CUSTOM) {
+      console.log(component);
       return <BuilderComponentCustom componentData={component} />;
     }
   });

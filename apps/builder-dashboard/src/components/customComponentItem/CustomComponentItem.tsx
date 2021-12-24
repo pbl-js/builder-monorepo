@@ -42,7 +42,7 @@ export const CustomComponentItem = (props: Props): JSX.Element => {
             text: 'Pierwszy dodany przez panel',
             price: 919,
           },
-          style: { backgroundColor: 'blue' },
+          style: {},
         },
       },
     };

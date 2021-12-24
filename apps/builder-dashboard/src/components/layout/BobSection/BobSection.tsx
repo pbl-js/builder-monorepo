@@ -7,7 +7,7 @@ const MainWrapper = styled.div`
   z-index: 10;
 
   &:hover {
-    border: 4px solid #0099fe;
+    border: 2px solid #0099fe;
   }
 `;
 

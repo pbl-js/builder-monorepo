@@ -24,6 +24,7 @@ export const useSendComponentDataToDashboard = (
     if (refData) {
       const { top, bottom, left, right, x, y, width, height } = refData;
       const domData = { top, bottom, left, right, x, y, width, height };
+      console.log(height);
 
       const newPostMessage: PostMessage_ToDashboard_SendComponentDomData = {
         messageType: PostMessageType_ToDashboard.SEND_COMPONENT_DOM_DATA,

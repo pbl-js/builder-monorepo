@@ -12,11 +12,11 @@ export const BuilderComponentCommonWrapper = ({
   componentData,
   children,
 }: Props) => {
-  const { id } = componentData;
+  const { id, style } = componentData;
   const ref = useSendComponentDataToDashboard(componentData);
 
   return (
-    <div style={{ position: 'relative' }} ref={ref} id="#main-wrapper-bob">
+    <div style={style} ref={ref} id="#main-wrapper-bob">
       {children}
     </div>
   );

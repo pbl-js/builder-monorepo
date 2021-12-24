@@ -4,19 +4,18 @@ import styled from 'styled-components';
 import { useBobComponentsData } from '../../../../modules/editorPage/context/BobComponentsData/BobComponentsData.hooks';
 
 const MainWrapper = styled.div`
-  position: absolute;
+  box-sizing: content-box;
   z-index: 10;
-  background-color: red;
+  position: reltive;
 
   &:hover {
-    border: 4px solid #0099fe;
+    border: 2px solid #0099fe;
   }
 `;
 
 interface Props {
   componentData: IDraftComponentData;
 }
-
 export const BobComponent = ({ componentData }: Props) => {
   const { componentsDomData } = useBobComponentsData();
 
@@ -25,6 +24,7 @@ export const BobComponent = ({ componentData }: Props) => {
   );
 
   const { width, height, left, top } = matchDomData?.domData || {};
+  const { style } = componentData;
 
-  return <MainWrapper style={{ width, height, left, top }}></MainWrapper>;
+  return <MainWrapper style={{ height, ...style }}></MainWrapper>;
 };
