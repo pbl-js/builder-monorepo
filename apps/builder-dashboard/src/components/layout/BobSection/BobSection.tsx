@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import { RenderComponents } from './RenderComponents/RenderComponents';
 
 const MainWrapper = styled.div`
+  box-sizing: content-box;
   position: absolute;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
 
-  &:hover {
+  /* &:hover {
     border: 2px solid #0099fe;
-  }
+  } */
 `;
 
 interface Props {

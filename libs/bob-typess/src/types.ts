@@ -7,8 +7,8 @@ export enum ComponentType {
 }
 
 export type ComponentStyles = Partial<{
-  width: string;
-  height: string;
+  width: number;
+  height: number;
 
   paddingTop: string;
   paddingRight: string;
@@ -20,10 +20,10 @@ export type ComponentStyles = Partial<{
   marginBottom: string;
   marginLeft: string;
 
-  top: string;
-  right: string;
-  bottom: string;
-  left: string;
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
 
   backgroundColor: string;
   color: string;

@@ -56,7 +56,12 @@ export const mockSectionData: IDraftData = {
         text: 'Pierwszy komponent za płotent',
         price: 9999,
       },
-      style: { paddingTop: '20px', paddingBottom: '20px' },
+      style: {
+        marginTop: '10px',
+        marginBottom: '10px',
+        marginLeft: '10px',
+        marginRight: '10px',
+      },
     },
     {
       id: 2,
@@ -68,7 +73,12 @@ export const mockSectionData: IDraftData = {
         text: 'Drugi komponent śmiga elegancko',
         price: 327,
       },
-      style: {},
+      style: {
+        marginTop: '10px',
+        marginBottom: '10px',
+        marginLeft: '10px',
+        marginRight: '10px',
+      },
     },
   ],
 };
