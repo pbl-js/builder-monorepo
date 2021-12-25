@@ -1,16 +1,36 @@
 import { IDraftComponentData, IDraftData } from '@bob-types';
-import { useGlobalUiDataState } from '../../../../modules/editorPage/context/GlobalUiData/GlobalUiData.hooks';
+import { useGlobalUiDataState } from '../../editorPage/context/GlobalUiData/GlobalUiData.hooks';
 import styled, { css } from 'styled-components';
-import { useBobComponentsData } from '../../../../modules/editorPage/context/BobComponentsData/BobComponentsData.hooks';
+import { useBobComponentsData } from '../../editorPage/context/BobComponentsData/BobComponentsData.hooks';
 import EditableMargin from './EditableMargin';
+import useHoverDirty from 'react-use/lib/useHoverDirty';
+import { useRef } from 'react';
 
 interface MainWrapper_SC {
   isActive: boolean;
+  isHovering: boolean;
 }
 
 const MainWrapper = styled.div<MainWrapper_SC>`
   position: relative;
   z-index: 10;
+
+  ${({ isHovering }) =>
+    isHovering &&
+    css`
+      &:hover {
+        &::after {
+          position: absolute;
+          top: 0;
+          left: 0;
+          display: block;
+          content: '';
+          width: 100%;
+          height: 100%;
+          border: 1px solid hsl(204, 100%, 50%);
+        }
+      }
+    `}
 
   ${({ isActive }) =>
     isActive &&
@@ -72,8 +92,13 @@ export const BobComponent = ({ componentData }: Props) => {
     });
   };
 
+  const ref = useRef(null);
+  const isHovering = useHoverDirty(ref);
+
   return (
     <MainWrapper
+      ref={ref}
+      isHovering={isHovering}
       isActive={isComponentActive}
       onClick={onClick}
       style={{
