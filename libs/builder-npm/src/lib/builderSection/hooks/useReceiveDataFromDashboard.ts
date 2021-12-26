@@ -24,6 +24,17 @@ export const useAddReciveMessageListener = () => {
           payload: { componentData },
         });
       }
+
+      if (messageType === PostMessageType_FromDashboard.UPDATE_COMPONENT) {
+        const {
+          messageData: { componentData },
+        } = event.data as unknown as PostMessage_FromDashboard_AddComponent;
+
+        dispatch({
+          type: BuilderSectionDataActionKindEnum.UPDATE_COMPONENT,
+          payload: { componentData },
+        });
+      }
     };
 
     window.addEventListener('message', receiveMessage, false);

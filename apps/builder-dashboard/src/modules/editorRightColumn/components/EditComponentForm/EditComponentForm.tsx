@@ -14,7 +14,13 @@ export const EditComponentForm = ({
     <div>
       {componentData.data.map((inputData) => {
         if (inputData.type === 'string') {
-          return <StringForm key={inputData.name} propData={inputData} />;
+          return (
+            <StringForm
+              key={inputData.name}
+              propData={inputData}
+              componentData={componentData}
+            />
+          );
         }
       })}
     </div>

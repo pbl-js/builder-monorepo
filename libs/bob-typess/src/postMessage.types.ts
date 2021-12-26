@@ -51,12 +51,12 @@ export interface PostMessage_FromDashboard_AddComponent {
 }
 
 export interface PostMessage_FromDashboard_UpdateComponent {
-  messageType: PostMessageType_FromDashboard.ADD_COMPONENT;
+  messageType: PostMessageType_FromDashboard.UPDATE_COMPONENT;
   messageData: UpdateComponentPayload;
 }
 
 export interface PostMessage_FromDashboard_DeleteComponent {
-  messageType: PostMessageType_FromDashboard.ADD_COMPONENT;
+  messageType: PostMessageType_FromDashboard.DELETE_COMPONENT;
   messageData: DeleteComponentPayload;
 }
 
