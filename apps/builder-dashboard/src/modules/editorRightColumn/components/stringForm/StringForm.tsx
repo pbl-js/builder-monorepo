@@ -1,13 +1,17 @@
 import { TextInput } from '../../../../components/atoms/TextInput';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { DraftComponent_DataItem_String } from '@bob-types';
 
 interface Props {
-  name: string;
-  defaultValue: string;
+  propData: DraftComponent_DataItem_String;
 }
 
-export const StringForm = ({ name, defaultValue }: Props) => {
-  const [value, setValue] = useState(defaultValue);
+export const StringForm = ({
+  propData: { name, value: initialValue },
+}: Props) => {
+  const [value, setValue] = useState(initialValue);
+
+  useEffect(() => setValue(initialValue), [initialValue]);
 
   return (
     <TextInput

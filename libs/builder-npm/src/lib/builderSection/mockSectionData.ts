@@ -1,47 +1,5 @@
 import { ComponentType, IDraftData } from '@bob-typess';
 
-// export const mockSectionData: componentOrderType = [
-//   {
-//     componentId: 1,
-//     componentType: ComponentType.WRAPPER,
-//     style: { backgroundColor: 'red' },
-//     components: [
-//       {
-//         componentId: 2,
-//         componentType: ComponentType.WRAPPER,
-//         style: { backgroundColor: 'blue' },
-//         components: [
-//           {
-//             componentId: 3,
-//             componentType: ComponentType.WRAPPER,
-//             style: { backgroundColor: 'green' },
-//             components: [],
-//           },
-//         ],
-//       },
-//       {
-//         componentId: 4,
-//         componentType: ComponentType.WRAPPER,
-//         style: { backgroundColor: 'green' },
-//         components: [
-//           {
-//             componentId: 5,
-//             componentType: ComponentType.TEXT,
-//             style: { backgroundColor: 'yellow' },
-//             components: [],
-//           },
-//           {
-//             componentId: 6,
-//             componentType: ComponentType.CUSTOM,
-//             style: { backgroundColor: 'megenta' },
-//             components: [],
-//           },
-//         ],
-//       },
-//     ],
-//   },
-// ];
-
 export const mockSectionData: IDraftData = {
   id: 1,
   name: 'home-banner',
@@ -52,10 +10,18 @@ export const mockSectionData: IDraftData = {
       jsxName: 'DEV-product-tile',
       layerName: 'first-custom-component',
       parentId: 'section',
-      data: {
-        text: 'Pierwszy komponent za płotent',
-        price: 9999,
-      },
+      data: [
+        {
+          type: 'string',
+          name: 'text',
+          value: 'Komponent nr 1 - mock dane',
+        },
+        {
+          type: 'number',
+          name: 'price',
+          value: 459,
+        },
+      ],
       style: {
         marginTop: '10px',
         marginBottom: '10px',
@@ -69,10 +35,18 @@ export const mockSectionData: IDraftData = {
       jsxName: 'DEV-product-tile',
       layerName: 'first-custom-component',
       parentId: 'section',
-      data: {
-        text: 'Drugi komponent śmiga elegancko',
-        price: 327,
-      },
+      data: [
+        {
+          type: 'string',
+          name: 'text',
+          value: 'Lorem ipsum dolor coś tam coś tam',
+        },
+        {
+          type: 'number',
+          name: 'price',
+          value: 39.99,
+        },
+      ],
       style: {
         marginTop: '10px',
         marginBottom: '10px',

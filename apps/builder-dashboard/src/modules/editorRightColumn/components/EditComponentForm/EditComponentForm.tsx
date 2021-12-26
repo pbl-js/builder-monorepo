@@ -12,18 +12,9 @@ export const EditComponentForm = ({
 }: Props) => {
   return (
     <div>
-      {bobCustomDomponent.data.map((inputData) => {
-        switch (inputData.type) {
-          case 'string':
-            return (
-              <StringForm
-                name={inputData.name}
-                defaultValue={inputData.defaultValue}
-              />
-            );
-
-          default:
-            break;
+      {componentData.data.map((inputData) => {
+        if (inputData.type === 'string') {
+          return <StringForm key={inputData.name} propData={inputData} />;
         }
       })}
     </div>

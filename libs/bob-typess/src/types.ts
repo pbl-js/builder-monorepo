@@ -57,6 +57,26 @@ export type componentOrderType = ComponentOrder[];
 // ----------------------------------------------------------------------------------------
 // Section
 
+export interface BobComponentProps {
+  [key: string]: string | number;
+}
+
+export interface DraftComponent_DataItem_String {
+  type: 'string';
+  name: string;
+  value: string;
+}
+
+export interface DraftComponent_DataItem_Number {
+  type: 'number';
+  name: string;
+  value: number;
+}
+
+export type DraftComponent_DataItem =
+  | DraftComponent_DataItem_String
+  | DraftComponent_DataItem_Number;
+
 export interface IDraftComponentData {
   id: number;
   componentType: ComponentType.CUSTOM;
@@ -66,9 +86,7 @@ export interface IDraftComponentData {
 
   parentId: 'section' | number | null;
   style: ComponentStyles;
-  data: {
-    [key: string]: string | number;
-  };
+  data: DraftComponent_DataItem[];
 }
 
 export interface IDraftData {
@@ -77,10 +95,3 @@ export interface IDraftData {
   domData?: DOMRect;
   components: IDraftComponentData[];
 }
-
-// export interface ISectionData {
-//   id: number;
-//   name: string;
-//   components: ICustomComponent[];
-//   domData: DOMRect;
-// }
