@@ -3,7 +3,6 @@ import {
   PostMessageType_ToDashboard,
   PostMessage_ToDashboard_Registercomponent,
   PostMessage_ToDashboard_RenderSection,
-  ComponentRectData,
 } from '@bob-types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { IBobComponentsDataContext } from '../../context/BobComponentsData/BobComponentsData.types';
@@ -17,7 +16,6 @@ export const useGetBobDataFromIframe = (): {
     activeDraft: null,
     componentsDomData: [],
   });
-  console.log(state);
   useEffect(() => {
     if (process.browser) {
       const receiveMessage = (event: MessageEvent<PostMessage_ToDashboard>) => {

@@ -44,7 +44,8 @@ export const BobSection = ({ sectionData }: Props) => {
   const { components } = sectionData;
 
   const ref = useRef(null);
-  const isHovering = useHoverDirty(ref);
+  // const isHovering = useHoverDirty(ref);
+  const isHovering = false;
 
   return (
     <MainWrapper ref={ref} isHovering={isHovering} style={style}>
