@@ -26,6 +26,7 @@
     "express": "^4.17.1",
     "graphql": "^15.8.0",
     "graphql-fields": "^2.0.3",
+    "graphql-request": "^3.7.0",
     "graphql-scalars": "^1.13.6",
     "install": "^0.13.0",
     "lodash": "^4.17.21",

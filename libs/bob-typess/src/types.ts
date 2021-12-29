@@ -36,12 +36,12 @@ export type BobRect = Pick<
 >;
 
 export interface ICustomComponent {
-  componentType: ComponentType.CUSTOM;
+  componentType: ComponentType.CUSTOM; /// -
   jsxElement: any;
   name: string;
-  layerName: string;
+  layerName: string; /// -
 
-  style: ComponentStyles;
+  style: ComponentStyles; /// defaultStyles
   data: BOBInputData[];
 }
 
