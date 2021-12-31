@@ -1,5 +1,3 @@
-import { BOBInputData } from './inputs.types';
-
 export enum ComponentType {
   TEXT = 'TEXT',
   WRAPPER = 'WRAPPER',
@@ -36,13 +34,11 @@ export type BobRect = Pick<
 >;
 
 export interface ICustomComponent {
-  componentType: ComponentType.CUSTOM; /// -
+  id: string;
   jsxElement: any;
   name: string;
-  layerName: string; /// -
-
-  style: ComponentStyles; /// defaultStyles
-  data: BOBInputData[];
+  style: ComponentStyles;
+  data: DraftComponent_DataItem[];
 }
 
 export interface ComponentOrder {
@@ -62,15 +58,15 @@ export interface BobComponentProps {
 }
 
 export interface DraftComponent_DataItem_String {
-  type: 'string';
+  id: string;
   name: string;
-  value: string;
+  valueString: string;
 }
 
 export interface DraftComponent_DataItem_Number {
-  type: 'number';
+  id: string;
   name: string;
-  value: number;
+  valueNumber: number;
 }
 
 export type DraftComponent_DataItem =
