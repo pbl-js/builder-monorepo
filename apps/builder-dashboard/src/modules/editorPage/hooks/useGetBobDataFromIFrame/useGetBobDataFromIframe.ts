@@ -6,6 +6,7 @@ import {
 } from '@bob-types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { IBobComponentsDataContext } from '../../context/BobComponentsData/BobComponentsData.types';
+import { useRegisteredComponents_API } from '../../utils/queries/getRegisteredComponents/hooks';
 
 export const useGetBobDataFromIframe = (): {
   state: IBobComponentsDataContext;
@@ -16,6 +17,9 @@ export const useGetBobDataFromIframe = (): {
     activeDraft: null,
     componentsDomData: [],
   });
+
+  const { data } = useRegisteredComponents_API();
+
   useEffect(() => {
     if (process.browser) {
       const receiveMessage = (event: MessageEvent<PostMessage_ToDashboard>) => {
