@@ -1,14 +1,16 @@
 import {
-  BOBInputData,
-  ComponentType,
+  DraftComponent_DataItem,
+  DraftComponent_DataItem_Number,
+  DraftComponent_DataItem_String,
   ICustomComponent,
   PostMessageType_ToDashboard,
   PostMessage_ToDashboard_Registercomponent,
 } from '@bob-typess';
+import { RegisterComponentInput } from './types';
 
-interface CustomComponentInputs {
+interface IRegisterComponent {
   name: string;
-  inputs: BOBInputData[];
+  inputs: RegisterComponentInput[];
 }
 
 // const registeredComponents = window.pblBuilder.customComponents;
@@ -32,23 +34,47 @@ export class BOB {
 
   static registerComponent(
     component: any,
-    componentData: CustomComponentInputs
+    componentData: IRegisterComponent
   ): void {
     if (typeof window !== 'undefined') {
       const asIframe = window.location !== window.parent.location;
 
+      // eslint-disable-next-line no-constant-condition
       if (true) {
         const existedComponent = this._customComponents.find(
           ({ name }) => name === componentData.name
         );
 
         if (!existedComponent) {
+          const convertedComponentProps: DraftComponent_DataItem[] = [];
+          componentData.inputs.forEach((input) => {
+            if (input.type === 'string') {
+              const convertedInput: DraftComponent_DataItem_String = {
+                name: input.name,
+                valueString: input.defaultValue,
+              };
+
+              return convertedComponentProps.push(convertedInput);
+            }
+
+            if (input.type === 'number') {
+              const convertedInput: DraftComponent_DataItem_Number = {
+                name: input.name,
+                valueNumber: input.defaultValue,
+              };
+
+              return convertedComponentProps.push(convertedInput);
+            }
+
+            return;
+          });
+
+          console.log(convertedComponentProps);
+
           const componentToPush: ICustomComponent = {
-            componentType: ComponentType.CUSTOM,
             jsxElement: component,
             name: componentData.name,
-            layerName: componentData.name,
-            data: componentData.inputs,
+            data: convertedComponentProps,
             style: {},
           };
 
@@ -57,12 +83,15 @@ export class BOB {
           const newPostMessage: PostMessage_ToDashboard_Registercomponent = {
             messageType: PostMessageType_ToDashboard.REGISTER_COMPONENT,
             messageData: {
-              ...componentToPush,
-              jsxElement: 'elo',
+              name: componentToPush.name,
+              data: componentToPush.data,
+              style: componentToPush.style,
             },
           };
 
-          window.parent.postMessage(newPostMessage, '*');
+          setTimeout(() => {
+            window.parent.postMessage(newPostMessage, '*');
+          }, 1000);
         }
       }
     }

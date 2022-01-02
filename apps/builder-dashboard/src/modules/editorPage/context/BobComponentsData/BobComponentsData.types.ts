@@ -1,7 +1,11 @@
-import { ComponentRectData, ICustomComponent, IDraftData } from '@bob-types';
+import {
+  ComponentRectData,
+  ICustomComponent_ApiPayload,
+  IDraftData,
+} from '@bob-types';
 
 export interface IBobComponentsDataContext {
-  customComponents: ICustomComponent[];
+  customComponents: ICustomComponent_ApiPayload[];
   activeDraft: IDraftData | null;
   componentsDomData: ComponentRectData[];
 }

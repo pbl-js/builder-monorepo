@@ -7,6 +7,7 @@ import { ComponentRectData } from './renderComponents.types';
 import {
   BobRect,
   ICustomComponent,
+  ICustomComponent_ApiPayload,
   IDraftComponentData,
   IDraftData,
 } from './types';
@@ -19,7 +20,7 @@ export enum PostMessageType_ToDashboard {
 
 export interface PostMessage_ToDashboard_Registercomponent {
   messageType: PostMessageType_ToDashboard.REGISTER_COMPONENT;
-  messageData: ICustomComponent;
+  messageData: ICustomComponent_ApiPayload;
 }
 
 export interface PostMessage_ToDashboard_SendComponentDomData {

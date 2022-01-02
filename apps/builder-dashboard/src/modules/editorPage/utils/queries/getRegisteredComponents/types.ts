@@ -42,8 +42,8 @@ export type RegisteredComponent_MutationData_PropData =
 
 export interface RegisteredComponent_MutationVars {
   data: {
+    // TODO: Add styles to mutation
     name: string;
-    jsxElement: string;
     props: RegisteredComponent_MutationData_PropData[];
   };
 }

@@ -7,7 +7,6 @@ export const GET_REGISTERED_COMPONENTS = gql`
         id
         attributes {
           name
-          jsxElement
           style
           props {
             ... on ComponentPropPropString {
@@ -28,13 +27,12 @@ export const GET_REGISTERED_COMPONENTS = gql`
 `;
 
 export const CREATE_REGISTERED_COMPONENTS = gql`
-  mutation ($data: RegisteredComponentInput) {
+  mutation ($data: RegisteredComponentInput!) {
     createRegisteredComponent(data: $data) {
       data {
         id
         attributes {
           name
-          jsxElement
           style
           props {
             ... on ComponentPropPropString {

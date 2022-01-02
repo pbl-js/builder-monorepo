@@ -34,37 +34,27 @@ export type BobRect = Pick<
 >;
 
 export interface ICustomComponent {
-  id: string;
   jsxElement: any;
   name: string;
   style: ComponentStyles;
   data: DraftComponent_DataItem[];
 }
 
-export interface ComponentOrder {
-  componentId: number;
-  componentType: ComponentType;
-  components: this[];
+export interface ICustomComponent_ApiPayload {
+  name: string;
   style: ComponentStyles;
+  data: DraftComponent_DataItem[];
 }
-
-export type componentOrderType = ComponentOrder[];
 
 // ----------------------------------------------------------------------------------------
 // Section
 
-export interface BobComponentProps {
-  [key: string]: string | number;
-}
-
 export interface DraftComponent_DataItem_String {
-  id: string;
   name: string;
   valueString: string;
 }
 
 export interface DraftComponent_DataItem_Number {
-  id: string;
   name: string;
   valueNumber: number;
 }

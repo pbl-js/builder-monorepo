@@ -6,7 +6,11 @@ import {
 } from '@bob-types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { IBobComponentsDataContext } from '../../context/BobComponentsData/BobComponentsData.types';
-import { useRegisteredComponents_API } from '../../utils/queries/getRegisteredComponents/hooks';
+import {
+  useCreateRegisterComponent,
+  useRegisteredComponents_API,
+} from '../../utils/queries/getRegisteredComponents/hooks';
+import { PropDataEnum } from '../../utils/queries/getRegisteredComponents/types';
 
 export const useGetBobDataFromIframe = (): {
   state: IBobComponentsDataContext;
@@ -18,10 +22,13 @@ export const useGetBobDataFromIframe = (): {
     componentsDomData: [],
   });
 
-  const { data } = useRegisteredComponents_API();
+  const { data: registeredComponentsData } = useRegisteredComponents_API();
+  const { createRegisterComponent, data, error, loading } =
+    useCreateRegisterComponent();
+  console.log(JSON.stringify(error, null, 2));
 
   useEffect(() => {
-    if (process.browser) {
+    if (process.browser && registeredComponentsData) {
       const receiveMessage = (event: MessageEvent<PostMessage_ToDashboard>) => {
         if (
           event.data.messageType ===
@@ -29,17 +36,32 @@ export const useGetBobDataFromIframe = (): {
         ) {
           const data =
             event.data as unknown as PostMessage_ToDashboard_Registercomponent;
+          const incomingComponentName = data.messageData.name;
+          const existedComponent = registeredComponentsData.find(
+            ({ name }) => name === incomingComponentName
+          );
 
-          setState((prevState) => {
-            const newCustomComponents = prevState.customComponents.map(
-              (item) => item
-            );
+          if (existedComponent) {
+            return;
+          }
+          const {
+            messageData: { data: props, name, style },
+          } = data;
 
-            return {
-              ...prevState,
-              customComponents: [...newCustomComponents, data.messageData],
-            };
-          });
+          console.log('eloszka', props, name, style);
+          // const siema = createRegisterComponent({ data: props, name, style });
+          createRegisterComponent();
+
+          // setState((prevState) => {
+          //   const newCustomComponents = prevState.customComponents.map(
+          //     (item) => item
+          //   );
+
+          //   return {
+          //     ...prevState,
+          //     customComponents: [...newCustomComponents, data.messageData],
+          //   };
+          // });
         }
 
         if (
@@ -74,9 +96,10 @@ export const useGetBobDataFromIframe = (): {
           });
         }
       };
+
       window.addEventListener('message', receiveMessage, false);
     }
-  }, []);
+  }, [registeredComponentsData, createRegisterComponent]);
 
   return { state, setState };
 };

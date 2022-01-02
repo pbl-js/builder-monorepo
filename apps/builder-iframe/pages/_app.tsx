@@ -10,6 +10,7 @@ const ProductTile = dynamic(
   async () => (await import('../components/productTile')).default
 );
 
+console.log(<ProductTile text="elo" price={44} />);
 BOB.registerComponent(ProductTile, {
   name: 'DEV-product-tile',
   inputs: [
