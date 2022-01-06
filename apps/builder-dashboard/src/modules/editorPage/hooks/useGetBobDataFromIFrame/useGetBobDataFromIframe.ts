@@ -4,24 +4,14 @@ import {
   PostMessage_ToDashboard_Registercomponent,
   PostMessage_ToDashboard_RenderSection,
 } from '@bob-types';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { IBobComponentsDataContext } from '../../context/BobComponentsData/BobComponentsData.types';
+import { useEffect } from 'react';
 import {
   useCreateRegisterComponent,
   useRegisteredComponents_API,
 } from '../../utils/queries/getRegisteredComponents/hooks';
 import { PropDataEnum } from '../../utils/queries/getRegisteredComponents/types';
 
-export const useGetBobDataFromIframe = (): {
-  state: IBobComponentsDataContext;
-  setState: Dispatch<SetStateAction<IBobComponentsDataContext>>;
-} => {
-  const [state, setState] = useState<IBobComponentsDataContext>({
-    customComponents: [],
-    activeDraft: null,
-    componentsDomData: [],
-  });
-
+export const useGetBobDataFromIframe = () => {
   const { data: registeredComponentsData } = useRegisteredComponents_API();
   const { createRegisterComponent, data, error, loading } =
     useCreateRegisterComponent();
@@ -70,12 +60,12 @@ export const useGetBobDataFromIframe = (): {
           const data =
             event.data as unknown as PostMessage_ToDashboard_RenderSection;
 
-          setState((prevState) => {
-            return {
-              ...prevState,
-              activeDraft: data.messageData,
-            };
-          });
+          // setState((prevState) => {
+          //   return {
+          //     ...prevState,
+          //     activeDraft: data.messageData,
+          //   };
+          // });
         }
 
         if (
@@ -84,22 +74,20 @@ export const useGetBobDataFromIframe = (): {
         ) {
           const incomingComponent = event.data.messageData;
 
-          setState((prevState) => {
-            const restComponents = prevState.componentsDomData.filter(
-              ({ componentId }) => componentId !== incomingComponent.componentId
-            );
+          // setState((prevState) => {
+          //   const restComponents = prevState.componentsDomData.filter(
+          //     ({ componentId }) => componentId !== incomingComponent.componentId
+          //   );
 
-            return {
-              ...prevState,
-              componentsDomData: [...restComponents, incomingComponent],
-            };
-          });
+          //   return {
+          //     ...prevState,
+          //     componentsDomData: [...restComponents, incomingComponent],
+          //   };
+          // });
         }
       };
 
       window.addEventListener('message', receiveMessage, false);
     }
   }, [registeredComponentsData, createRegisterComponent]);
-
-  return { state, setState };
 };

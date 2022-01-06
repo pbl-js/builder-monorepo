@@ -42,7 +42,7 @@ export const useCreateRegisterComponent = () => {
         name: 'ddsd',
         props: [
           {
-            __typename: 'ComponentPropPropString',
+            __typename: PropDataEnum.STRING,
             name: 'text',
             valueString: 'elo',
           },

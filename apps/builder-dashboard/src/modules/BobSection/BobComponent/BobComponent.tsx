@@ -1,10 +1,10 @@
 import { IDraftComponentData, IDraftData } from '@bob-types';
 import { useGlobalUiDataState } from '../../editorPage/context/GlobalUiData/GlobalUiData.hooks';
 import styled, { css } from 'styled-components';
-import { useBobComponentsData } from '../../editorPage/context/BobComponentsData/BobComponentsData.hooks';
 import EditableMargin from './EditableMargin';
 import useHoverDirty from 'react-use/lib/useHoverDirty';
 import { useRef } from 'react';
+import { useComponentsRectData } from '../../editorPage/context/ComponentsRectDataContext/ComponentsRectDataContext';
 
 interface MainWrapper_SC {
   isActive: boolean;
@@ -53,10 +53,12 @@ interface Props {
   componentData: IDraftComponentData;
 }
 export const BobComponent = ({ componentData }: Props) => {
-  const { componentsDomData } = useBobComponentsData();
+  const {
+    state: { componentsRectData },
+  } = useComponentsRectData();
   const { setState, activeComponents } = useGlobalUiDataState();
 
-  const matchDomData = componentsDomData.find(
+  const matchDomData = componentsRectData.find(
     ({ componentId }) => componentId === componentData.id
   );
 

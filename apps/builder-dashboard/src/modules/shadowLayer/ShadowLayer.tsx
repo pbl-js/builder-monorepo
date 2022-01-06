@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { BobSection } from '../BobSection/BobSection';
-import { useBobComponentsData } from '../editorPage/context/BobComponentsData/BobComponentsData.hooks';
+// import { useBobComponentsData } from '../editorPage/context/ComponentsRectDataContext/BobComponentsData.hooks';
 import { useGlobalUiDataState } from '../editorPage/context/GlobalUiData/GlobalUiData.hooks';
 
 const CoverLayer = styled.div`
@@ -15,11 +15,11 @@ const CoverLayer = styled.div`
 
 export const ShadowLayer = (): JSX.Element => {
   const { isDragging } = useGlobalUiDataState();
-  const { activeDraft } = useBobComponentsData();
+  // const { activeDraft } = useBobComponentsData();
   return (
     <>
       {isDragging && <CoverLayer />}
-      {activeDraft && <BobSection sectionData={activeDraft} />}
+      {/* {activeDraft && <BobSection sectionData={activeDraft} />} */}
     </>
   );
 };
