@@ -41,9 +41,14 @@ export type PostMessage_ToDashboard =
 // Post message from Dashboard
 
 export enum PostMessageType_FromDashboard {
+  OPEN_COMUNICATION = 'open-comunication',
   ADD_COMPONENT = 'add-component',
   UPDATE_COMPONENT = 'update-component',
   DELETE_COMPONENT = 'delete-component',
+}
+
+export interface PostMessage_FromDashboard_OpenComunication {
+  messageType: PostMessageType_FromDashboard.OPEN_COMUNICATION;
 }
 
 export interface PostMessage_FromDashboard_AddComponent {
@@ -62,6 +67,7 @@ export interface PostMessage_FromDashboard_DeleteComponent {
 }
 
 export type PostMessage_FromDashboard =
+  | PostMessage_FromDashboard_OpenComunication
   | PostMessage_FromDashboard_AddComponent
   | PostMessage_FromDashboard_UpdateComponent
   | PostMessage_FromDashboard_DeleteComponent;

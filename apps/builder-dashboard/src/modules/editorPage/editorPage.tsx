@@ -3,7 +3,7 @@ import { Layout } from '../../components/layout/layout';
 import { EditorHeader } from '../editorHeader/editorHeader';
 import EditorLeftColumn from '../editorLeftColumn/editorLeftColumn';
 import EditorRightColumn from '../editorRightColumn/editorRightColumn';
-import { IFrameComunicator } from './components/IFrameComunicator/IFrameComunicator';
+import { IFrameComunicator } from '../IFrameComunicator/IFrameComunicator';
 import { WorkSection } from './components/workSection/workSection';
 import { ComponentsRectDataProvider } from './context/ComponentsRectDataContext/ComponentsRectDataContext';
 import { GlobalUiDataContextProvider } from './context/GlobalUiData/GlobalUiData.context';

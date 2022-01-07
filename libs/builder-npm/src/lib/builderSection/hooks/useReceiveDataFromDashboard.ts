@@ -2,9 +2,10 @@ import {
   PostMessageType_FromDashboard,
   PostMessage_FromDashboard,
   PostMessage_FromDashboard_AddComponent,
+  PostMessage_FromDashboard_OpenComunication,
 } from '@bob-types';
 import { useEffect } from 'react';
-import { useBuilderSectionData } from '../context/builderSectionData.hooks';
+import { useBuilderSectionData } from '../context/builderSectionData.context';
 import { BuilderSectionDataActionKindEnum } from '../context/builderSectionData.types';
 
 export const useAddReciveMessageListener = () => {
@@ -13,6 +14,12 @@ export const useAddReciveMessageListener = () => {
   useEffect(() => {
     const receiveMessage = (event: MessageEvent<PostMessage_FromDashboard>) => {
       const { messageType } = event.data;
+
+      if (messageType === PostMessageType_FromDashboard.OPEN_COMUNICATION) {
+        dispatch({
+          type: BuilderSectionDataActionKindEnum.OPEN_COMUNICATION,
+        });
+      }
 
       if (messageType === PostMessageType_FromDashboard.ADD_COMPONENT) {
         const {

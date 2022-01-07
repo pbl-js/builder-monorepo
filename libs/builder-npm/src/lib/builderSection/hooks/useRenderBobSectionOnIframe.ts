@@ -4,7 +4,7 @@ import {
   PostMessage_ToDashboard_RenderSection,
 } from '@bob-types';
 import { useEffect } from 'react';
-import { useBuilderSectionData } from '../context/builderSectionData.hooks';
+import { useBuilderSectionData } from '../context/builderSectionData.context';
 
 const sendPostMessage = (
   ref: React.MutableRefObject<HTMLDivElement | null>,
@@ -26,13 +26,15 @@ const sendPostMessage = (
 export const useRenderBobSectionOnIframe = (
   ref: React.MutableRefObject<HTMLDivElement | null>
 ) => {
-  const { sectionData } = useBuilderSectionData();
+  const {
+    state: { draft },
+  } = useBuilderSectionData();
 
   useEffect(() => {
-    sendPostMessage(ref, sectionData);
+    sendPostMessage(ref, draft);
 
-    window.addEventListener('scroll', () => sendPostMessage(ref, sectionData));
+    window.addEventListener('scroll', () => sendPostMessage(ref, draft));
 
-    window.addEventListener('resize', () => sendPostMessage(ref, sectionData));
-  }, [ref, sectionData]);
+    window.addEventListener('resize', () => sendPostMessage(ref, draft));
+  }, [ref, draft]);
 };

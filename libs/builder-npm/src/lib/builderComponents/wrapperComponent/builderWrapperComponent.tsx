@@ -1,5 +1,4 @@
 import {
-  ComponentOrder,
   CurrentParrentType,
   IDraftComponentData,
   RenderComponentsType,

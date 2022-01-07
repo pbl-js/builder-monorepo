@@ -1,28 +1,32 @@
 import {
   AddComponentPayload,
   DeleteComponentPayload,
+  ICustomComponent,
   IDraftData,
   UpdateComponentPayload,
 } from '@bob-types';
 
-// Context
-// export interface IBuilderSectionActionsContext {
-//   addComponent: (data: AddComponentPayload) => void;
-//   updateComponent: (data: UpdateComponentPayload) => void;
-//   deleteComponent: (data: DeleteComponentPayload) => void;
-//   dispatch: React.Dispatch<BuilderSectionDataAction>;
-// }
+export interface BuilderSectionDataState {
+  draft: IDraftData;
+  isComunicationOpen: boolean;
+  registeredComponents: ICustomComponent[];
+}
 
 export interface IBuilderSectionDataContext {
-  sectionData: IDraftData;
+  state: BuilderSectionDataState;
   dispatch: React.Dispatch<BuilderSectionDataAction>;
 }
 
 // Reducer
 export enum BuilderSectionDataActionKindEnum {
+  OPEN_COMUNICATION = 'open-comunication',
   UPDATE_COMPONENT = 'update-component',
   ADD_COMPONENT = 'add-component',
   DELETE_COMPONENT = 'delete-component',
+}
+
+export interface BuilderSectionDataAction_OpenComunication {
+  type: BuilderSectionDataActionKindEnum.OPEN_COMUNICATION;
 }
 
 export interface BuilderSectionDataAction_AddComponent {
@@ -41,6 +45,7 @@ export interface BuilderSectionDataAction_UpdateComponent {
 }
 
 export type BuilderSectionDataAction =
+  | BuilderSectionDataAction_OpenComunication
   | BuilderSectionDataAction_AddComponent
   | BuilderSectionDataAction_DeleteComponent
   | BuilderSectionDataAction_UpdateComponent;
