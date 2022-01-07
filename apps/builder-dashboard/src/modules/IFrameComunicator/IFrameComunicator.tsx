@@ -36,9 +36,7 @@ export const IFrameComunicator = () => {
 
   useEffect(() => {
     if (isReady) {
-      const receiveMessage = async (
-        event: MessageEvent<PostMessage_ToDashboard>
-      ) => {
+      const receiveMessage = (event: MessageEvent<PostMessage_ToDashboard>) => {
         if (
           event.data.messageType ===
           PostMessageType_ToDashboard.REGISTER_COMPONENTS
@@ -59,11 +57,7 @@ export const IFrameComunicator = () => {
               return true;
             }
           );
-          console.log('incomingComponents: ', incomingComponents);
-          console.log('existedComponents: ', existedComponents);
-          console.log('unregisteredComponents: ', unregisteredComponents);
-
-          // const siema = createRegisterComponent({ data: props, name, style });
+          // TODO: Handle updateRegisteredComponent
           unregisteredComponents.forEach(async ({ name, data }) => {
             await createRegisterComponent({
               variables: {

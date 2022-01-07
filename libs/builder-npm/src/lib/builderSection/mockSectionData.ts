@@ -12,14 +12,12 @@ export const mockSectionData: IDraftData = {
       parentId: 'section',
       data: [
         {
-          type: 'string',
           name: 'text',
-          value: 'Komponent nr 1 - mock dane',
+          valueString: 'Komponent nr 1 - mock dane',
         },
         {
-          type: 'number',
           name: 'price',
-          value: 459,
+          valueNumber: 459,
         },
       ],
       style: {
@@ -37,14 +35,12 @@ export const mockSectionData: IDraftData = {
       parentId: 'section',
       data: [
         {
-          type: 'string',
           name: 'text',
-          value: 'Lorem ipsum dolor coś tam coś tam',
+          valueString: 'Lorem ipsum dolor coś tam coś tam',
         },
         {
-          type: 'number',
           name: 'price',
-          value: 39.99,
+          valueNumber: 39.99,
         },
       ],
       style: {
