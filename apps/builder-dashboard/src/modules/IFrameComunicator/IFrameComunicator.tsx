@@ -1,28 +1,85 @@
 import {
   PostMessageType_FromDashboard,
+  PostMessageType_ToDashboard,
   PostMessage_FromDashboard_OpenComunication,
+  PostMessage_ToDashboard,
+  PostMessage_ToDashboard_Registercomponents,
 } from '@bob-types';
 import React, { useEffect } from 'react';
 import useEffectOnce from 'react-use/lib/useEffectOnce';
 import { useGetBobDataFromIframe } from '../editorPage/hooks/useGetBobDataFromIFrame/useGetBobDataFromIframe';
-import { useRegisteredComponents_API } from '../editorPage/utils/queries/getRegisteredComponents/hooks';
+import {
+  useCreateRegisterComponent,
+  useRegisteredComponents_API,
+} from '../editorPage/utils/queries/getRegisteredComponents/hooks';
+import { parseRegisteredComponentProps } from '../editorPage/utils/queries/getRegisteredComponents/utils';
 
 export const IFrameComunicator = () => {
   const { data: registeredComponentsData } = useRegisteredComponents_API();
 
+  const isReady = registeredComponentsData !== undefined;
+
+  const createRegisterComponent = useCreateRegisterComponent();
+
   useEffect(() => {
-    if (registeredComponentsData && registeredComponentsData.length > 0) {
+    if (isReady) {
       const newPostMessage: PostMessage_FromDashboard_OpenComunication = {
         messageType: PostMessageType_FromDashboard.OPEN_COMUNICATION,
       };
-      console.log('postmessage się wysyła', newPostMessage);
 
       // TODO: Add isIframeReady function instead of timeout
       setTimeout(() => {
         window.frames[0].postMessage(newPostMessage, '*');
       }, 500);
     }
-  }, [registeredComponentsData]);
+  }, [isReady]);
+
+  useEffect(() => {
+    if (isReady) {
+      const receiveMessage = async (
+        event: MessageEvent<PostMessage_ToDashboard>
+      ) => {
+        if (
+          event.data.messageType ===
+          PostMessageType_ToDashboard.REGISTER_COMPONENTS
+        ) {
+          const data =
+            event.data as unknown as PostMessage_ToDashboard_Registercomponents;
+
+          const incomingComponents = data.messageData.registeredComponents;
+          const existedComponents = registeredComponentsData;
+          const unregisteredComponents = incomingComponents.filter(
+            ({ name: incomingName }) => {
+              const matchComponent = existedComponents.find(
+                ({ name }) => name === incomingName
+              );
+              if (matchComponent) {
+                return false;
+              }
+              return true;
+            }
+          );
+          console.log('incomingComponents: ', incomingComponents);
+          console.log('existedComponents: ', existedComponents);
+          console.log('unregisteredComponents: ', unregisteredComponents);
+
+          // const siema = createRegisterComponent({ data: props, name, style });
+          unregisteredComponents.forEach(async ({ name, data }) => {
+            await createRegisterComponent({
+              variables: {
+                data: {
+                  name: name,
+                  props: parseRegisteredComponentProps(data),
+                },
+              },
+            });
+          });
+        }
+      };
+
+      window.addEventListener('message', receiveMessage, false);
+    }
+  }, []);
 
   return null;
 };

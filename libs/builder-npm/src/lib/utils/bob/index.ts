@@ -79,19 +79,6 @@ export class BOB {
           };
 
           this._customComponents.push(componentToPush);
-
-          const newPostMessage: PostMessage_ToDashboard_Registercomponent = {
-            messageType: PostMessageType_ToDashboard.REGISTER_COMPONENT,
-            messageData: {
-              name: componentToPush.name,
-              data: componentToPush.data,
-              style: componentToPush.style,
-            },
-          };
-
-          setTimeout(() => {
-            window.parent.postMessage(newPostMessage, '*');
-          }, 1000);
         }
       }
     }

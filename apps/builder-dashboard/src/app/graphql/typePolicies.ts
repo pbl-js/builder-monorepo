@@ -13,6 +13,7 @@ export const typePolicies: TypePolicies = {
   RegisteredComponentEntity: {
     keyFields: ['id'],
   },
+
   // RegisteredComponent: {
   //   keyFields: ['name'],
   // },

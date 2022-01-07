@@ -1,5 +1,6 @@
-import { ApolloError, useMutation, useQuery } from '@apollo/client';
+import { ApolloError, gql, useMutation, useQuery } from '@apollo/client';
 import { ICustomComponent } from '@bob-types';
+import { useEffect } from 'react';
 import { convertGetRegisteredComponents } from './converter';
 import {
   CREATE_REGISTERED_COMPONENTS,
@@ -32,45 +33,36 @@ export const useRegisteredComponents_API =
 
 export const useCreateRegisterComponent = () => {
   const [createRegisterComponent, { data, loading, error }] = useMutation<
-    {
-      createRegisterComponents: CreateRegisteredComponent;
-    },
+    { createRegisteredComponent: CreateRegisteredComponent },
     RegisteredComponent_MutationVars
   >(CREATE_REGISTERED_COMPONENTS, {
-    variables: {
-      data: {
-        name: 'ddsd',
-        props: [
-          {
-            __typename: PropDataEnum.STRING,
-            name: 'text',
-            valueString: 'elo',
+    update(cache, { data: updatedData }) {
+      const registeredComponentsQuery =
+        cache.readQuery<GetRegisteredComponents>({
+          query: GET_REGISTERED_COMPONENTS,
+        });
+
+      if (registeredComponentsQuery && updatedData) {
+        cache.writeQuery<GetRegisteredComponents>({
+          query: GET_REGISTERED_COMPONENTS,
+          data: {
+            registeredComponents: {
+              data: [
+                ...registeredComponentsQuery.registeredComponents.data,
+                updatedData.createRegisteredComponent.data,
+              ],
+            },
           },
-        ],
-      },
+        });
+      }
     },
   });
 
-  function createRegisterComponentWithParsedProps({
-    name,
-    style,
-    data: props,
-  }: Omit<ICustomComponent, 'jsxElement'>) {
-    const parsedProps = parseRegisteredComponentProps(props);
-    return () => {
-      console.log('wykonuje', parsedProps);
-      // createRegisterComponent({
-      //   variables: {
-      //     registeredComponent: { data: { name, props: parsedProps } },
-      //   },
-      // });
-    };
-  }
+  useEffect(() => {
+    if (error) {
+      console.log(JSON.stringify(error));
+    }
+  }, [error]);
 
-  return {
-    createRegisterComponent,
-    data,
-    loading,
-    error,
-  };
+  return createRegisterComponent;
 };

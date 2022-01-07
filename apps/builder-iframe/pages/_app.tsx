@@ -18,6 +18,13 @@ BOB.registerComponent(ProductTile, {
     { name: 'price', type: 'number', defaultValue: 4 },
   ],
 });
+BOB.registerComponent(ProductTile, {
+  name: 'test-2',
+  inputs: [
+    { name: 'text', type: 'string', defaultValue: 'text' },
+    { name: 'price', type: 'number', defaultValue: 4 },
+  ],
+});
 
 function CustomApp({ Component, pageProps }: AppProps) {
   // const ComponentTest = BOB._customComponents[0].jsxElement;

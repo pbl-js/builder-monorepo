@@ -1,7 +1,7 @@
 import {
   PostMessage_ToDashboard,
   PostMessageType_ToDashboard,
-  PostMessage_ToDashboard_Registercomponent,
+  PostMessage_ToDashboard_Registercomponents,
   PostMessage_ToDashboard_RenderSection,
 } from '@bob-types';
 import { useEffect } from 'react';
@@ -22,10 +22,11 @@ export const useGetBobDataFromIframe = () => {
       const receiveMessage = (event: MessageEvent<PostMessage_ToDashboard>) => {
         if (
           event.data.messageType ===
-          PostMessageType_ToDashboard.REGISTER_COMPONENT
+          PostMessageType_ToDashboard.REGISTER_COMPONENTS
         ) {
           const data =
-            event.data as unknown as PostMessage_ToDashboard_Registercomponent;
+            event.data as unknown as PostMessage_ToDashboard_Registercomponents;
+          console.log('eloszka', data);
           const incomingComponentName = data.messageData.name;
           const existedComponent = registeredComponentsData.find(
             ({ name }) => name === incomingComponentName
@@ -41,17 +42,6 @@ export const useGetBobDataFromIframe = () => {
           console.log('eloszka', props, name, style);
           // const siema = createRegisterComponent({ data: props, name, style });
           createRegisterComponent();
-
-          // setState((prevState) => {
-          //   const newCustomComponents = prevState.customComponents.map(
-          //     (item) => item
-          //   );
-
-          //   return {
-          //     ...prevState,
-          //     customComponents: [...newCustomComponents, data.messageData],
-          //   };
-          // });
         }
 
         if (

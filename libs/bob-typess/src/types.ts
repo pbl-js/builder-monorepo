@@ -41,9 +41,11 @@ export interface ICustomComponent {
 }
 
 export interface ICustomComponent_ApiPayload {
-  name: string;
-  style: ComponentStyles;
-  data: DraftComponent_DataItem[];
+  registeredComponents: {
+    name: string;
+    style: ComponentStyles;
+    data: DraftComponent_DataItem[];
+  }[];
 }
 
 // ----------------------------------------------------------------------------------------

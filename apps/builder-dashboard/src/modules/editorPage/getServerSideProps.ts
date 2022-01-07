@@ -6,7 +6,7 @@ import { GetRegisteredComponents } from './utils/queries/getRegisteredComponents
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const apolloClient = initializeApollo();
-    const { error } = await apolloClient.query<GetRegisteredComponents>({
+    const { error, data } = await apolloClient.query<GetRegisteredComponents>({
       query: GET_REGISTERED_COMPONENTS,
     });
 
@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     }
 
     return addApolloState(apolloClient, {
-      props: {},
+      props: { data },
     });
   } catch (err) {
     /**

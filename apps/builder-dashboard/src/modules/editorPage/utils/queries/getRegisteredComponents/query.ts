@@ -27,7 +27,7 @@ export const GET_REGISTERED_COMPONENTS = gql`
 `;
 
 export const CREATE_REGISTERED_COMPONENTS = gql`
-  mutation ($data: RegisteredComponentInput!) {
+  mutation CreateRegisteredComponent($data: RegisteredComponentInput!) {
     createRegisteredComponent(data: $data) {
       data {
         id

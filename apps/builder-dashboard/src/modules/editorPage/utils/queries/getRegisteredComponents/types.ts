@@ -49,7 +49,5 @@ export interface RegisteredComponent_MutationVars {
 }
 
 export interface CreateRegisteredComponent {
-  createRegisteredComponent: {
-    data: RegisteredComponent[];
-  };
+  data: RegisteredComponent;
 }

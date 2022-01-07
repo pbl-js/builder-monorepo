@@ -13,13 +13,13 @@ import {
 } from './types';
 
 export enum PostMessageType_ToDashboard {
-  REGISTER_COMPONENT = 'register-component',
+  REGISTER_COMPONENTS = 'register-components',
   SEND_COMPONENT_DOM_DATA = 'send-component-dom-data',
   RENDER_SECTION = 'render-section',
 }
 
-export interface PostMessage_ToDashboard_Registercomponent {
-  messageType: PostMessageType_ToDashboard.REGISTER_COMPONENT;
+export interface PostMessage_ToDashboard_Registercomponents {
+  messageType: PostMessageType_ToDashboard.REGISTER_COMPONENTS;
   messageData: ICustomComponent_ApiPayload;
 }
 
@@ -34,7 +34,7 @@ export interface PostMessage_ToDashboard_RenderSection {
 }
 
 export type PostMessage_ToDashboard =
-  | PostMessage_ToDashboard_Registercomponent
+  | PostMessage_ToDashboard_Registercomponents
   | PostMessage_ToDashboard_RenderSection
   | PostMessage_ToDashboard_SendComponentDomData;
 
