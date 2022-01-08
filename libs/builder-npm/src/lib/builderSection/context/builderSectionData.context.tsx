@@ -1,8 +1,9 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 import { mockSectionData } from '../mockSectionData';
 import { builderSectionDataReducer } from './builderSectionData.reducer';
 import { IBuilderSectionDataContext } from './builderSectionData.types';
 import { BOB } from '../../utils/bob';
+import { fetchDraft } from '../api/fetchDraft';
 
 export const initialState: IBuilderSectionDataContext = {
   state: {
@@ -20,7 +21,14 @@ const BuilderSectionDataContextProvider: React.FC = ({ children }) => {
     builderSectionDataReducer,
     initialState.state
   );
-  console.log(state);
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchDraft('1');
+      console.log(data);
+    })();
+  }, []);
+
   return (
     <BuilderSectionDataContext.Provider value={{ state, dispatch }}>
       {children}
