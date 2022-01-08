@@ -17,7 +17,7 @@ function BuilderSectionInner({ name }: BuilderSectionProps) {
 
   const {
     state: {
-      draft: { components, name: sectionName },
+      draft: { components },
     },
   } = useBuilderSectionData();
 

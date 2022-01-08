@@ -51,9 +51,8 @@ async function fetchDraft(id: string): Promise<StrapiDraftDataResponse> {
   });
 
   type JSONResponse = {
-    data?: {
-      draft: StrapiDraftDataResponse;
-    };
+    data?: StrapiDraftDataResponse;
+
     errors?: Array<{ message: string }>;
   };
 
@@ -62,7 +61,7 @@ async function fetchDraft(id: string): Promise<StrapiDraftDataResponse> {
   if (response.ok) {
     const draft = data?.draft;
     if (draft) {
-      return draft;
+      return data;
     } else {
       return Promise.reject(new Error(`No draft with the id "${id}"`));
     }

@@ -50,6 +50,10 @@ const builderSectionDataReducer = (
     return { ...state, isComunicationOpen: true };
   }
 
+  if (type === BuilderSectionDataActionKindEnum.SET_DRAFT_DATA) {
+    return { ...state, draft: action.payload.draftData };
+  }
+
   if (type === BuilderSectionDataActionKindEnum.ADD_COMPONENT) {
     return addComponentAction(state, action.payload);
   }

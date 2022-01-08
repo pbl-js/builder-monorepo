@@ -15,3 +15,8 @@ export type ComponentRectData = {
   componentId: number;
   domData: BobRect;
 };
+
+// Map props from api structure to component structure
+export type BobComponentProps = {
+  [key: string]: string | number;
+};

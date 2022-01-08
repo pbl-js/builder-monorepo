@@ -1,13 +1,21 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { mockSectionData } from '../mockSectionData';
 import { builderSectionDataReducer } from './builderSectionData.reducer';
-import { IBuilderSectionDataContext } from './builderSectionData.types';
+import {
+  BuilderSectionDataActionKindEnum,
+  IBuilderSectionDataContext,
+} from './builderSectionData.types';
 import { BOB } from '../../utils/bob';
 import { fetchDraft } from '../api/fetchDraft';
+import { convertDraft } from '../api/convertDraft';
 
 export const initialState: IBuilderSectionDataContext = {
   state: {
-    draft: mockSectionData,
+    draft: {
+      id: '',
+      name: '',
+      components: [],
+    },
     isComunicationOpen: false,
     registeredComponents: BOB._customComponents,
   },
@@ -21,11 +29,16 @@ const BuilderSectionDataContextProvider: React.FC = ({ children }) => {
     builderSectionDataReducer,
     initialState.state
   );
-
+  console.log('state', state);
   useEffect(() => {
+    // TODO: Add possibility to pass data (serverside) to context
     (async () => {
       const data = await fetchDraft('1');
-      console.log(data);
+      const convertedData = convertDraft(data);
+      dispatch({
+        type: BuilderSectionDataActionKindEnum.SET_DRAFT_DATA,
+        payload: { draftData: convertedData },
+      });
     })();
   }, []);
 

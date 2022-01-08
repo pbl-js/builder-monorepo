@@ -3,6 +3,7 @@ import {
   DeleteComponentPayload,
   ICustomComponent,
   IDraftData,
+  SetDraftDataPayload,
   UpdateComponentPayload,
 } from '@bob-types';
 
@@ -20,6 +21,7 @@ export interface IBuilderSectionDataContext {
 // Reducer
 export enum BuilderSectionDataActionKindEnum {
   OPEN_COMUNICATION = 'open-comunication',
+  SET_DRAFT_DATA = 'set-draft-data',
   UPDATE_COMPONENT = 'update-component',
   ADD_COMPONENT = 'add-component',
   DELETE_COMPONENT = 'delete-component',
@@ -27,6 +29,11 @@ export enum BuilderSectionDataActionKindEnum {
 
 export interface BuilderSectionDataAction_OpenComunication {
   type: BuilderSectionDataActionKindEnum.OPEN_COMUNICATION;
+}
+
+export interface BuilderSectionDataAction_SetDraftData {
+  type: BuilderSectionDataActionKindEnum.SET_DRAFT_DATA;
+  payload: SetDraftDataPayload;
 }
 
 export interface BuilderSectionDataAction_AddComponent {
@@ -45,6 +52,7 @@ export interface BuilderSectionDataAction_UpdateComponent {
 }
 
 export type BuilderSectionDataAction =
+  | BuilderSectionDataAction_SetDraftData
   | BuilderSectionDataAction_OpenComunication
   | BuilderSectionDataAction_AddComponent
   | BuilderSectionDataAction_DeleteComponent

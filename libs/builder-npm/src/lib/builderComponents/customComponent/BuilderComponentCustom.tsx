@@ -1,7 +1,9 @@
 import {
   BobComponentProps,
+  DraftComponent_DataItem,
   IDraftComponentData,
-  IDraftComponent_DataItem,
+  isNumberProp,
+  isStringProp,
 } from '@bob-types';
 import { BOB } from '../../utils/bob';
 import { BuilderComponentCommonWrapper } from '../commonWrapper/BuilderComponentCommonWrapper';
@@ -13,24 +15,36 @@ interface Props {
 export const BuilderComponentCustom = ({
   componentData,
 }: Props): JSX.Element | null => {
-  const { jsxName, data } = componentData;
+  const { jsxName, props } = componentData;
 
   const { jsxElement: Component } =
     BOB._customComponents.find(({ name }) => jsxName === name) || {};
 
   const generateProps = (
-    propsApiData: IDraftComponent_DataItem[]
+    propsApiData: DraftComponent_DataItem[]
   ): BobComponentProps => {
     const props: BobComponentProps = {};
-    propsApiData.forEach(({ name, value }) => (props[name] = value));
+
+    propsApiData.forEach((propApi) => {
+      const { name } = propApi;
+
+      if (isStringProp(propApi)) {
+        props[name] = propApi.valueString;
+      }
+
+      if (isNumberProp(propApi)) {
+        props[name] = propApi.valueNumber;
+      }
+    });
+
     return props;
   };
 
-  const props = generateProps(componentData.data);
+  const generatedProps = generateProps(props);
 
   return Component ? (
     <BuilderComponentCommonWrapper componentData={componentData}>
-      <Component {...props} />
+      <Component {...generatedProps} />
     </BuilderComponentCommonWrapper>
   ) : null;
 };

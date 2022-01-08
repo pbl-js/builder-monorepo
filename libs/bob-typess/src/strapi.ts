@@ -1,6 +1,6 @@
 import { IDraftComponentData } from './types';
 
-export type StrapiComponentData = Omit<IDraftComponentData, 'jsxName' | 'id'>;
+export type StrapiComponentData = Omit<IDraftComponentData, 'id' | 'domData'>;
 
 export type StrapiDraftData = {
   id: string;
@@ -10,7 +10,7 @@ export type StrapiDraftData = {
       data: {
         id: string;
         attributes: StrapiComponentData;
-      };
+      }[];
     };
   };
 };
