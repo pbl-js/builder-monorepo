@@ -9,10 +9,8 @@ import {
 import {
   CreateRegisteredComponent,
   GetRegisteredComponents,
-  PropDataEnum,
   RegisteredComponent_MutationVars,
 } from './types';
-import { parseRegisteredComponentProps } from './utils';
 
 interface UseRegisteredComponents_API_ReturnType {
   data: ICustomComponent[] | undefined;
@@ -25,7 +23,7 @@ export const useRegisteredComponents_API =
     const { data, loading, error } = useQuery<GetRegisteredComponents>(
       GET_REGISTERED_COMPONENTS
     );
-
+    console.log(data);
     const convertedData = data && convertGetRegisteredComponents(data);
 
     return { data: convertedData, loading, error };

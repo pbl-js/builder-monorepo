@@ -7,11 +7,11 @@ export const convertGetRegisteredComponents = (
   const registeredComponents = data.registeredComponents.data;
   const convertedComponents: ICustomComponent[] = registeredComponents.map(
     ({ id, attributes }) => {
-      const { props: data, ...rest } = attributes;
+      const { inputs, ...rest } = attributes;
 
       return {
         id,
-        data,
+        inputs: inputs.inputs,
         ...rest,
       };
     }

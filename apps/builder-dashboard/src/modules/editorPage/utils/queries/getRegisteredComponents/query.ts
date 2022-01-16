@@ -8,18 +8,7 @@ export const GET_REGISTERED_COMPONENTS = gql`
         attributes {
           name
           style
-          props {
-            ... on ComponentPropPropString {
-              id
-              name
-              valueString
-            }
-            ... on ComponentPropPropNumber {
-              id
-              name
-              valueNumber
-            }
-          }
+          inputs
         }
       }
     }
@@ -34,18 +23,7 @@ export const CREATE_REGISTERED_COMPONENTS = gql`
         attributes {
           name
           style
-          props {
-            ... on ComponentPropPropString {
-              id
-              name
-              valueString
-            }
-            ... on ComponentPropPropNumber {
-              id
-              name
-              valueNumber
-            }
-          }
+          inputs
         }
       }
     }

@@ -37,14 +37,14 @@ export interface ICustomComponent {
   jsxElement: any;
   name: string;
   style: ComponentStyles;
-  data: DraftComponent_DataItem[];
+  inputs: DraftComponent_DataItem[];
 }
 
 export interface ICustomComponent_ApiPayload {
   registeredComponents: {
     name: string;
     style: ComponentStyles;
-    data: DraftComponent_DataItem[];
+    inputs: DraftComponent_DataItem[];
   }[];
 }
 
