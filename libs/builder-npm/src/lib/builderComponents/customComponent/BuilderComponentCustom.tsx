@@ -15,7 +15,7 @@ interface Props {
 export const BuilderComponentCustom = ({
   componentData,
 }: Props): JSX.Element | null => {
-  const { jsxName, props } = componentData;
+  const { jsxName, inputs } = componentData;
 
   const { jsxElement: Component } =
     BOB._customComponents.find(({ name }) => jsxName === name) || {};
@@ -40,7 +40,7 @@ export const BuilderComponentCustom = ({
     return props;
   };
 
-  const generatedProps = generateProps(props);
+  const generatedProps = generateProps(inputs);
 
   return Component ? (
     <BuilderComponentCommonWrapper componentData={componentData}>

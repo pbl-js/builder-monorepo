@@ -4,17 +4,15 @@ function convertDraft({ draft }: StrapiDraftDataResponse): IDraftData {
   const convertedDraft: IDraftData = {
     id: draft.data.id,
     name: draft.data.attributes.name,
-    components: draft.data.attributes.components.data.map(
-      ({ id, attributes }) => {
-        const { componentType, parentId, layerName, style, props, jsxName } =
-          attributes;
+    components: draft.data.attributes.content.components.map(
+      ({ componentType, parentId, layerName, style, inputs, jsxName, id }) => {
         return {
           id,
           componentType,
           parentId,
           layerName,
           style,
-          props,
+          inputs,
           jsxName,
         };
       }

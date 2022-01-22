@@ -34,7 +34,6 @@ export type BobRect = Pick<
 >;
 
 export interface ICustomComponent {
-  jsxElement: any;
   name: string;
   style: ComponentStyles;
   inputs: DraftComponent_DataItem[];
@@ -74,7 +73,7 @@ export interface IDraftComponentData {
 
   parentId: 'section' | number | null;
   style: ComponentStyles;
-  props: DraftComponent_DataItem[];
+  inputs: DraftComponent_DataItem[];
 }
 
 export interface IDraftData {

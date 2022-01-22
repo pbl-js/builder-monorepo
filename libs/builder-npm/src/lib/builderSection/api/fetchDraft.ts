@@ -8,31 +8,7 @@ async function fetchDraft(id: string): Promise<StrapiDraftDataResponse> {
           id
           attributes{
             name
-            components{
-              data{
-                id
-                attributes{
-                  componentType
-                  style
-                  jsxName
-                  layerName
-                  parentId
-                  props{
-                    __typename
-                    ... on ComponentPropPropString {
-                      id
-                      name
-                      valueString
-                    }
-                    ... on ComponentPropPropNumber {
-                      id
-                      name
-                      valueNumber
-                    }
-                  }
-                }
-              }
-            }
+            content
           }
         }
       }

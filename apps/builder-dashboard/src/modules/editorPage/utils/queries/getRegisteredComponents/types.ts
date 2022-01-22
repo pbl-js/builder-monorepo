@@ -10,7 +10,6 @@ export interface RegisteredComponent {
   id: string;
   attributes: {
     name: string;
-    jsxElement: string;
     style: ComponentStyles;
     inputs: {
       inputs: DraftComponent_DataItem[];

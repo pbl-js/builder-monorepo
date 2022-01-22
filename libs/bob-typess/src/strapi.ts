@@ -1,16 +1,14 @@
 import { IDraftComponentData } from './types';
 
-export type StrapiComponentData = Omit<IDraftComponentData, 'id' | 'domData'>;
+// TODO: Przerób section reducer tak żeby dom data dla kompomentów była oddzielnym stanem
+export type StrapiComponentData = Omit<IDraftComponentData, 'domData'>;
 
 export type StrapiDraftData = {
   id: string;
   attributes: {
     name: string;
-    components: {
-      data: {
-        id: string;
-        attributes: StrapiComponentData;
-      }[];
+    content: {
+      components: StrapiComponentData[];
     };
   };
 };
