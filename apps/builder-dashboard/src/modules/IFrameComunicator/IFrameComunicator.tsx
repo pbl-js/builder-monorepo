@@ -4,6 +4,7 @@ import {
   PostMessage_FromDashboard_OpenComunication,
   PostMessage_ToDashboard,
   PostMessage_ToDashboard_Registercomponents,
+  PostMessage_ToDashboard_RenderSection,
   PostMessage_ToDashboard_SendComponentDomData,
 } from '@bob-types';
 import React, { useEffect } from 'react';
@@ -73,13 +74,27 @@ export const IFrameComunicator = () => {
           });
         }
         if (
+          event.data.messageType === PostMessageType_ToDashboard.RENDER_SECTION
+        ) {
+          const data =
+            event.data as unknown as PostMessage_ToDashboard_RenderSection;
+          const { sectionId, domData } = data.messageData;
+          dispatch({
+            type: 'add-section-data',
+            payload: { sectionId, domData },
+          });
+        }
+        if (
           event.data.messageType ===
           PostMessageType_ToDashboard.SEND_COMPONENT_DOM_DATA
         ) {
           const data =
             event.data as unknown as PostMessage_ToDashboard_SendComponentDomData;
           const { componentId, domData } = data.messageData;
-          dispatch({ type: 'add-data', payload: { componentId, domData } });
+          dispatch({
+            type: 'add-component-data',
+            payload: { componentId, domData },
+          });
         }
       };
 

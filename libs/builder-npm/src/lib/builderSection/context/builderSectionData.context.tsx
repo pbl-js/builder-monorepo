@@ -11,11 +11,7 @@ import { convertDraft } from '../api/convertDraft';
 
 export const initialState: IBuilderSectionDataContext = {
   state: {
-    draft: {
-      id: '',
-      name: '',
-      components: [],
-    },
+    draft: undefined,
     isComunicationOpen: false,
     registeredComponents: BOB._customComponents,
   },
@@ -29,7 +25,7 @@ const BuilderSectionDataContextProvider: React.FC = ({ children }) => {
     builderSectionDataReducer,
     initialState.state
   );
-  console.log('state', state);
+
   useEffect(() => {
     // TODO: Add possibility to pass data (serverside) to context
     (async () => {

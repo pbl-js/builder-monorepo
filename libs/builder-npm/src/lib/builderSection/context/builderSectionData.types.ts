@@ -8,7 +8,7 @@ import {
 } from '@bob-types';
 
 export interface BuilderSectionDataState {
-  draft: IDraftData;
+  draft: IDraftData | undefined;
   isComunicationOpen: boolean;
   registeredComponents: ICustomComponent[];
 }

@@ -3,7 +3,7 @@ import {
   DeleteComponentPayload,
   UpdateComponentPayload,
 } from './payloads.types';
-import { ComponentRectData } from './renderComponents.types';
+import { ComponentRectData, SectionRectData } from './renderComponents.types';
 import {
   BobRect,
   ICustomComponent,
@@ -30,7 +30,7 @@ export interface PostMessage_ToDashboard_SendComponentDomData {
 
 export interface PostMessage_ToDashboard_RenderSection {
   messageType: PostMessageType_ToDashboard.RENDER_SECTION;
-  messageData: IDraftData;
+  messageData: SectionRectData;
 }
 
 export type PostMessage_ToDashboard =

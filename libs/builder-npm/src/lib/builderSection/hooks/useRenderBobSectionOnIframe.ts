@@ -12,17 +12,19 @@ const postMessage_renderSection = (
   ref: React.MutableRefObject<HTMLDivElement | null>,
   sectionData: IDraftData
 ) => {
-  const sectionDomData = ref.current?.getBoundingClientRect();
+  const domData = ref.current?.getBoundingClientRect();
 
-  const newPostMessage: PostMessage_ToDashboard_RenderSection = {
-    messageType: PostMessageType_ToDashboard.RENDER_SECTION,
-    messageData: {
-      ...sectionData,
-      domData: sectionDomData,
-    },
-  };
+  if (domData) {
+    const newPostMessage: PostMessage_ToDashboard_RenderSection = {
+      messageType: PostMessageType_ToDashboard.RENDER_SECTION,
+      messageData: {
+        sectionId: sectionData.id,
+        domData: domData,
+      },
+    };
 
-  return window.parent.postMessage(newPostMessage, '*');
+    return window.parent.postMessage(newPostMessage, '*');
+  }
 };
 
 function postMessage_registerComponents() {
@@ -58,14 +60,16 @@ export const useRenderBobSectionOnIframe = (
   }, [isComunicationOpen]);
 
   useEffect(() => {
-    postMessage_renderSection(ref, draft);
+    if (draft) {
+      postMessage_renderSection(ref, draft);
 
-    window.addEventListener('scroll', () =>
-      postMessage_renderSection(ref, draft)
-    );
+      window.addEventListener('scroll', () =>
+        postMessage_renderSection(ref, draft)
+      );
 
-    window.addEventListener('resize', () =>
-      postMessage_renderSection(ref, draft)
-    );
+      window.addEventListener('resize', () =>
+        postMessage_renderSection(ref, draft)
+      );
+    }
   }, [ref, draft]);
 };

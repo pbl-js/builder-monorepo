@@ -16,6 +16,11 @@ export type ComponentRectData = {
   domData: BobRect;
 };
 
+export type SectionRectData = {
+  sectionId: number;
+  domData: BobRect;
+};
+
 // Map props from api structure to component structure
 export type BobComponentProps = {
   [key: string]: string | number;

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { RenderComponents } from './RenderComponents/RenderComponents';
 import useHoverDirty from 'react-use/lib/useHoverDirty';
 import { useRef } from 'react';
+import { useComponentsRectData } from '../editorPage/context/ComponentsRectDataContext/ComponentsRectDataContext';
 
 interface MainWrapper_SC {
   isHovering: boolean;
@@ -14,6 +15,7 @@ const MainWrapper = styled.div<MainWrapper_SC>`
   z-index: 10;
   display: flex;
   flex-direction: column;
+  border: 1px solid red;
 
   ${({ isHovering }) =>
     isHovering &&
@@ -38,7 +40,14 @@ interface Props {
 }
 
 export const BobSection = ({ sectionData }: Props) => {
-  const { left, top, width, height } = sectionData.domData || {};
+  const {
+    state: { sectionsRectData },
+  } = useComponentsRectData();
+  const matchSectionRectData = sectionsRectData.find(
+    ({ sectionId }) => sectionId === sectionData.id
+  );
+
+  const { left, top, width, height } = matchSectionRectData?.domData || {};
   const style = { top, left, width, height };
 
   const { components } = sectionData;
