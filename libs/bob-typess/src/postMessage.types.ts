@@ -1,6 +1,7 @@
 import {
   AddComponentPayload,
   DeleteComponentPayload,
+  SetDraftDataPayload,
   UpdateComponentPayload,
 } from './payloads.types';
 import { ComponentRectData, SectionRectData } from './renderComponents.types';
@@ -42,6 +43,7 @@ export type PostMessage_ToDashboard =
 
 export enum PostMessageType_FromDashboard {
   OPEN_COMUNICATION = 'open-comunication',
+  SET_DRAFT_DATA = 'set-draft-data',
   ADD_COMPONENT = 'add-component',
   UPDATE_COMPONENT = 'update-component',
   DELETE_COMPONENT = 'delete-component',
@@ -56,6 +58,11 @@ export interface PostMessage_FromDashboard_AddComponent {
   messageData: AddComponentPayload;
 }
 
+export interface PostMessage_FromDashboard_SetDraftData {
+  messageType: PostMessageType_FromDashboard.SET_DRAFT_DATA;
+  messageData: SetDraftDataPayload;
+}
+
 export interface PostMessage_FromDashboard_UpdateComponent {
   messageType: PostMessageType_FromDashboard.UPDATE_COMPONENT;
   messageData: UpdateComponentPayload;
@@ -67,6 +74,7 @@ export interface PostMessage_FromDashboard_DeleteComponent {
 }
 
 export type PostMessage_FromDashboard =
+  | PostMessage_FromDashboard_SetDraftData
   | PostMessage_FromDashboard_OpenComunication
   | PostMessage_FromDashboard_AddComponent
   | PostMessage_FromDashboard_UpdateComponent

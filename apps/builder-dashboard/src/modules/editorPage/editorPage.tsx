@@ -9,7 +9,6 @@ import { ComponentsRectDataProvider } from './context/ComponentsRectDataContext/
 import { GlobalUiDataContextProvider } from './context/GlobalUiData/GlobalUiData.context';
 
 export const EditorPage = ({ data }) => {
-  console.log('InitialProps: ', data);
   return (
     <ComponentsRectDataProvider>
       <GlobalUiDataContextProvider>

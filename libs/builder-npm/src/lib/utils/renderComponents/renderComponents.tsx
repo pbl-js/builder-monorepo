@@ -1,6 +1,5 @@
 import { BuilderTextComponent } from '../../builderComponents/textComponent/builderTextComponent';
 import {
-  ComponentOrder,
   ComponentType,
   IDraftComponentData,
   RenderComponentsProps,

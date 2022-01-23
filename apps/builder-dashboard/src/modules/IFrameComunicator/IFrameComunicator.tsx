@@ -2,6 +2,7 @@ import {
   PostMessageType_FromDashboard,
   PostMessageType_ToDashboard,
   PostMessage_FromDashboard_OpenComunication,
+  PostMessage_FromDashboard_SetDraftData,
   PostMessage_ToDashboard,
   PostMessage_ToDashboard_Registercomponents,
   PostMessage_ToDashboard_RenderSection,
@@ -11,6 +12,7 @@ import React, { useEffect } from 'react';
 import useEffectOnce from 'react-use/lib/useEffectOnce';
 import { useComponentsRectData } from '../editorPage/context/ComponentsRectDataContext/ComponentsRectDataContext';
 import { useGetBobDataFromIframe } from '../editorPage/hooks/useGetBobDataFromIFrame/useGetBobDataFromIframe';
+import { UseDraft_API } from '../editorPage/utils/queries/getDraft/hooks';
 import {
   useCreateRegisterComponent,
   useRegisteredComponents_API,
@@ -19,8 +21,10 @@ import { parseRegisteredComponentProps } from '../editorPage/utils/queries/getRe
 
 export const IFrameComunicator = () => {
   const { data: registeredComponentsData } = useRegisteredComponents_API();
+  const { data: draftData } = UseDraft_API(1);
 
-  const isReady = registeredComponentsData !== undefined;
+  const isReady =
+    registeredComponentsData !== undefined && draftData !== undefined;
 
   const createRegisterComponent = useCreateRegisterComponent();
   const { dispatch } = useComponentsRectData();
@@ -36,6 +40,23 @@ export const IFrameComunicator = () => {
         window.frames[0].postMessage(newPostMessage, '*');
       }, 500);
     }
+  }, [isReady]);
+
+  useEffect(() => {
+    if (isReady) {
+      const newPostMessage: PostMessage_FromDashboard_SetDraftData = {
+        messageType: PostMessageType_FromDashboard.SET_DRAFT_DATA,
+        messageData: {
+          draftData,
+        },
+      };
+
+      // TODO: Add isIframeReady function instead of timeout
+      setTimeout(() => {
+        window.frames[0].postMessage(newPostMessage, '*');
+      }, 500);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReady]);
 
   useEffect(() => {
@@ -100,7 +121,7 @@ export const IFrameComunicator = () => {
 
       window.addEventListener('message', receiveMessage, false);
     }
-  }, []);
+  }, [isReady]);
 
   return null;
 };

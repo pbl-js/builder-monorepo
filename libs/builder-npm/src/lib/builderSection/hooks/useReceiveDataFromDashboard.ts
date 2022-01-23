@@ -2,7 +2,7 @@ import {
   PostMessageType_FromDashboard,
   PostMessage_FromDashboard,
   PostMessage_FromDashboard_AddComponent,
-  PostMessage_FromDashboard_OpenComunication,
+  PostMessage_FromDashboard_SetDraftData,
 } from '@bob-types';
 import { useEffect } from 'react';
 import { useBuilderSectionData } from '../context/builderSectionData.context';
@@ -18,6 +18,15 @@ export const useAddReciveMessageListener = () => {
       if (messageType === PostMessageType_FromDashboard.OPEN_COMUNICATION) {
         dispatch({
           type: BuilderSectionDataActionKindEnum.OPEN_COMUNICATION,
+        });
+      }
+
+      if (messageType === PostMessageType_FromDashboard.SET_DRAFT_DATA) {
+        const { messageData } =
+          event.data as unknown as PostMessage_FromDashboard_SetDraftData;
+        dispatch({
+          type: BuilderSectionDataActionKindEnum.SET_DRAFT_DATA,
+          payload: messageData,
         });
       }
 

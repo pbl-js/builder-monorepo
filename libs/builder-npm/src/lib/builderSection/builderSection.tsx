@@ -18,7 +18,7 @@ function BuilderSectionInner({ name }: BuilderSectionProps) {
   const {
     state: { draft },
   } = useBuilderSectionData();
-
+  console.log('draft', draft);
   useRenderBobSectionOnIframe(ref);
   useAddReciveMessageListener();
 

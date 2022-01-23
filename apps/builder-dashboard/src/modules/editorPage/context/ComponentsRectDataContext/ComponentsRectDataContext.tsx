@@ -3,7 +3,6 @@ import { createContext, useContext, useReducer } from 'react';
 
 type Action =
   | { type: 'add-section-data'; payload: SectionRectData }
-  // | { type: 'update-section-data'; payload: SectionRectData }
   | { type: 'add-component-data'; payload: ComponentRectData }
   | { type: 'remove-data'; payload: ComponentRectData };
 type Dispatch = (action: Action) => void;
@@ -19,11 +18,14 @@ const ComponentsRectDataContext = createContext<
 
 function componentsRectDataReducer(state: State, action: Action): State {
   switch (action.type) {
-    // TODO: Add existedComponents handler
     case 'add-component-data': {
+      const existedComponents = state.componentsRectData.filter(
+        ({ componentId }) => componentId !== action.payload.componentId
+      );
+
       return {
         ...state,
-        componentsRectData: [...state.componentsRectData, action.payload],
+        componentsRectData: [...existedComponents, action.payload],
       };
     }
     case 'add-section-data': {
@@ -36,11 +38,6 @@ function componentsRectDataReducer(state: State, action: Action): State {
         sectionsRectData: [...existedSections, action.payload],
       };
     }
-    // case 'update-section-data': {
-    //   const restSections = state.sectionsRectData.filter(
-    //     ({ sectionId }) => sectionId !== action.payload.sectionId
-    //   );
-    // }
 
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

@@ -15,7 +15,6 @@ const MainWrapper = styled.div<MainWrapper_SC>`
   z-index: 10;
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
 
   ${({ isHovering }) =>
     isHovering &&

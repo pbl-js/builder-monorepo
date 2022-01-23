@@ -8,6 +8,7 @@ import {
 import { BOB } from '../../utils/bob';
 import { fetchDraft } from '../api/fetchDraft';
 import { convertDraft } from '../api/convertDraft';
+import { isInsideIframe } from '../../utils/isInsideIframe';
 
 export const initialState: IBuilderSectionDataContext = {
   state: {
@@ -27,15 +28,17 @@ const BuilderSectionDataContextProvider: React.FC = ({ children }) => {
   );
 
   useEffect(() => {
-    // TODO: Add possibility to pass data (serverside) to context
-    (async () => {
-      const data = await fetchDraft('1');
-      const convertedData = convertDraft(data);
-      dispatch({
-        type: BuilderSectionDataActionKindEnum.SET_DRAFT_DATA,
-        payload: { draftData: convertedData },
-      });
-    })();
+    if (!isInsideIframe && state.draft === undefined) {
+      // TODO: Add possibility to pass data (serverside) to context
+      (async () => {
+        const data = await fetchDraft('1');
+        const convertedData = convertDraft(data);
+        dispatch({
+          type: BuilderSectionDataActionKindEnum.SET_DRAFT_DATA,
+          payload: { draftData: convertedData },
+        });
+      })();
+    }
   }, []);
 
   return (
