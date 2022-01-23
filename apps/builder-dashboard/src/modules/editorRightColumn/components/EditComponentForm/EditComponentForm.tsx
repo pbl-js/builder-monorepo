@@ -1,4 +1,8 @@
-import { ICustomComponent, IDraftComponentData } from '@bob-types';
+import {
+  ICustomComponent,
+  IDraftComponentData,
+  isStringProp,
+} from '@bob-types';
 import { StringForm } from '../stringForm/StringForm';
 
 interface Props {
@@ -12,8 +16,8 @@ export const EditComponentForm = ({
 }: Props) => {
   return (
     <div>
-      {componentData.data.map((inputData) => {
-        if (inputData.type === 'string') {
+      {componentData.inputs.map((inputData) => {
+        if (isStringProp(inputData)) {
           return (
             <StringForm
               key={inputData.name}

@@ -14,18 +14,15 @@ interface Props {
 }
 
 export const StringForm = ({ propData, componentData }: Props) => {
-  const { name, value } = propData;
-  // const [value, setValue] = useState(initialValue);
-
-  // useEffect(() => setValue(initialValue), [initialValue]);
+  const { name, valueString } = propData;
 
   const onChange = (e: any) => {
     const newPropData: DraftComponent_DataItem_String = {
       ...propData,
-      value: e.target.value,
+      valueString: e.target.value,
     };
 
-    const restComponentData_data = componentData.data.filter(
+    const restComponentData_data = componentData.inputs.filter(
       ({ name }) => name !== propData.name
     );
 
@@ -34,7 +31,7 @@ export const StringForm = ({ propData, componentData }: Props) => {
       messageData: {
         componentData: {
           ...componentData,
-          data: [...restComponentData_data, newPropData],
+          inputs: [...restComponentData_data, newPropData],
         },
       },
     };
@@ -43,5 +40,7 @@ export const StringForm = ({ propData, componentData }: Props) => {
     window.frames[0].postMessage(newPostMessage, '*');
   };
 
-  return <TextInput label={name} value={value} onChange={(e) => onChange(e)} />;
+  return (
+    <TextInput label={name} value={valueString} onChange={(e) => onChange(e)} />
+  );
 };

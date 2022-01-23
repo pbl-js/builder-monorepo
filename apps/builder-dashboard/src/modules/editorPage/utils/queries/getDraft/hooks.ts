@@ -4,6 +4,7 @@ import {
   StrapiDraftDataResponse,
   StrapiDraftDataVariables,
 } from '@bob-types';
+import { useMemo } from 'react';
 import { convertGetDraft } from './converter';
 import { GET_DRAFT } from './query';
 
@@ -19,7 +20,7 @@ export const UseDraft_API = (id: number): UseDraft_API_ReturnType => {
     StrapiDraftDataVariables
   >(GET_DRAFT, { variables: { id } });
 
-  const convertedData = data && convertGetDraft(data);
+  const convertedData = useMemo(() => data && convertGetDraft(data), [data]);
 
   return { data: convertedData, loading, error };
 };
