@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { BobSection } from '../BobSection/BobSection';
 // import { useBobComponentsData } from '../editorPage/context/ComponentsRectDataContext/BobComponentsData.hooks';
 import { useGlobalUiDataState } from '../editorPage/context/GlobalUiData/GlobalUiData.hooks';
+import { UseDraft_API } from '../editorPage/utils/queries/getDraft/hooks';
 
 const CoverLayer = styled.div`
   position: absolute;
@@ -15,11 +16,12 @@ const CoverLayer = styled.div`
 
 export const ShadowLayer = (): JSX.Element => {
   const { isDragging } = useGlobalUiDataState();
-  // const { activeDraft } = useBobComponentsData();
+  const { data } = UseDraft_API(1);
+
   return (
     <>
       {isDragging && <CoverLayer />}
-      {/* {activeDraft && <BobSection sectionData={activeDraft} />} */}
+      {data && <BobSection sectionData={data} />}
     </>
   );
 };

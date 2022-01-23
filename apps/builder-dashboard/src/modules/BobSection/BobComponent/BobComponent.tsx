@@ -105,6 +105,7 @@ export const BobComponent = ({ componentData }: Props) => {
       onClick={onClick}
       style={{
         height,
+        width,
         marginTop: s_marginTop,
         marginBottom: s_marginBottom,
         marginLeft: s_marginLeft,

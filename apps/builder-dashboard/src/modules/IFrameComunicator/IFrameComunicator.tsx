@@ -4,9 +4,11 @@ import {
   PostMessage_FromDashboard_OpenComunication,
   PostMessage_ToDashboard,
   PostMessage_ToDashboard_Registercomponents,
+  PostMessage_ToDashboard_SendComponentDomData,
 } from '@bob-types';
 import React, { useEffect } from 'react';
 import useEffectOnce from 'react-use/lib/useEffectOnce';
+import { useComponentsRectData } from '../editorPage/context/ComponentsRectDataContext/ComponentsRectDataContext';
 import { useGetBobDataFromIframe } from '../editorPage/hooks/useGetBobDataFromIFrame/useGetBobDataFromIframe';
 import {
   useCreateRegisterComponent,
@@ -20,6 +22,7 @@ export const IFrameComunicator = () => {
   const isReady = registeredComponentsData !== undefined;
 
   const createRegisterComponent = useCreateRegisterComponent();
+  const { dispatch } = useComponentsRectData();
 
   useEffect(() => {
     if (isReady) {
@@ -68,6 +71,15 @@ export const IFrameComunicator = () => {
               },
             });
           });
+        }
+        if (
+          event.data.messageType ===
+          PostMessageType_ToDashboard.SEND_COMPONENT_DOM_DATA
+        ) {
+          const data =
+            event.data as unknown as PostMessage_ToDashboard_SendComponentDomData;
+          const { componentId, domData } = data.messageData;
+          dispatch({ type: 'add-data', payload: { componentId, domData } });
         }
       };
 

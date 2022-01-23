@@ -1,7 +1,9 @@
 import { ComponentRectData } from '@bob-types';
 import { createContext, useContext, useReducer } from 'react';
 
-type Action = { type: 'add-data' } | { type: 'remove-data' };
+type Action =
+  | { type: 'add-data'; payload: ComponentRectData }
+  | { type: 'remove-data'; payload: ComponentRectData };
 type Dispatch = (action: Action) => void;
 type State = { componentsRectData: ComponentRectData[] };
 type ComponentsRectDataProviderProps = { children: React.ReactNode };
@@ -13,7 +15,10 @@ const ComponentsRectDataContext = createContext<
 function componentsRectDataReducer(state: State, action: Action): State {
   switch (action.type) {
     case 'add-data': {
-      return { ...state };
+      return {
+        ...state,
+        componentsRectData: [...state.componentsRectData, action.payload],
+      };
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

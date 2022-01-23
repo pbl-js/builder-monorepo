@@ -26,7 +26,6 @@ export const useGetBobDataFromIframe = () => {
         ) {
           const data =
             event.data as unknown as PostMessage_ToDashboard_Registercomponents;
-          console.log('eloszka', data);
           const incomingComponentName = data.messageData.name;
           const existedComponent = registeredComponentsData.find(
             ({ name }) => name === incomingComponentName

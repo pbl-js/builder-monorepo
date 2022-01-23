@@ -65,7 +65,7 @@ export type DraftComponent_DataItem =
   | DraftComponent_DataItem_Number;
 
 export interface IDraftComponentData {
-  id: string;
+  id: number;
   componentType: ComponentType.CUSTOM;
   jsxName: string;
   layerName: string;
@@ -77,7 +77,7 @@ export interface IDraftComponentData {
 }
 
 export interface IDraftData {
-  id: string;
+  id: number;
   name: string;
   components: IDraftComponentData[];
 }

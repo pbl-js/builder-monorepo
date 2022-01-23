@@ -24,3 +24,7 @@ export type StrapiDraftDataResponse = {
     data: StrapiDraftData;
   };
 };
+
+export type StrapiDraftDataVariables = {
+  id: number;
+};

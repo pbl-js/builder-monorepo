@@ -5,14 +5,18 @@ import {
 } from '@bob-types';
 import { useEffect } from 'react';
 import useMeasure, { UseMeasureRef } from 'react-use/lib/useMeasure';
+import { useBuilderSectionData } from '../context/builderSectionData.context';
 
 export const useSendComponentDataToDashboard = (
   componentData: IDraftComponentData
 ): UseMeasureRef<HTMLDivElement> => {
   const [ref, refData] = useMeasure<HTMLDivElement>();
+  const {
+    state: { isComunicationOpen },
+  } = useBuilderSectionData();
 
   useEffect(() => {
-    if (refData) {
+    if (refData && isComunicationOpen) {
       const { top, bottom, left, right, x, y, width, height } = refData;
       const domData = { top, bottom, left, right, x, y, width, height };
 
@@ -26,7 +30,7 @@ export const useSendComponentDataToDashboard = (
 
       window.parent.postMessage(newPostMessage, '*');
     }
-  }, [refData, componentData.id]);
+  }, [refData, componentData.id, isComunicationOpen]);
 
   return ref;
 };
