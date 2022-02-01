@@ -27,7 +27,7 @@ function BuilderSectionInner({ name }: BuilderSectionProps) {
       {draft &&
         renderComponents({
           components: draft.components,
-          currentParrent: 'section',
+          currentParrent: 0,
         })}
     </div>
   );
