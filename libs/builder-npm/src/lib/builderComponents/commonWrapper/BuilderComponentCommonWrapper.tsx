@@ -12,7 +12,7 @@ export const BuilderComponentCommonWrapper = ({
   componentData,
   children,
 }: Props) => {
-  const { id, style } = componentData;
+  const { id, styles: style } = componentData;
   const ref = useSendComponentDataToDashboard(componentData);
 
   return (

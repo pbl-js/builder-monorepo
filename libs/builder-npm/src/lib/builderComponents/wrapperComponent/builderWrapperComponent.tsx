@@ -10,7 +10,7 @@ const BuilderWrapperComponent: React.FC<{
   parentId: CurrentParrentType;
   renderComponents: RenderComponentsType;
 }> = ({ component, parentId, renderComponents }) => {
-  const { style } = component;
+  const { styles: style } = component;
   const bgc = style?.backgroundColor;
 
   return (

@@ -16,7 +16,7 @@ function convertDraft({ draft }: StrapiDraftDataResponse): IDraftData {
           componentType,
           parentId,
           layerName,
-          style,
+          styles: style,
           inputs,
           jsxName,
         },

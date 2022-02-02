@@ -4,8 +4,15 @@ export const convertGetDraft = (data: StrapiDraftDataResponse): IDraftData => {
   const convertedDraft: IDraftData = {
     id: data.draft.data.id,
     name: data.draft.data.attributes.name,
-    components: data.draft.data.attributes.content.components,
+    components: data.draft.data.attributes.components.data.map(
+      ({ id, attributes }) => {
+        return {
+          ...attributes,
+        };
+      }
+    ),
   };
+  console.log(convertedDraft);
 
   return convertedDraft;
 };

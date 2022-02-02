@@ -20,7 +20,7 @@ export const mockSectionData: IDraftData = {
           valueNumber: 459,
         },
       ],
-      style: {
+      styles: {
         marginTop: '10px',
         marginBottom: '10px',
         marginLeft: '10px',
@@ -43,7 +43,7 @@ export const mockSectionData: IDraftData = {
           valueNumber: 39.99,
         },
       ],
-      style: {
+      styles: {
         marginTop: '10px',
         marginBottom: '10px',
         marginLeft: '10px',

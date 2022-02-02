@@ -73,7 +73,7 @@ export interface IDraftComponentData {
   domData?: BobRect;
 
   parentId: number;
-  style: ComponentStyles;
+  styles: ComponentStyles;
   inputs: DraftComponent_DataItem[];
 }
 

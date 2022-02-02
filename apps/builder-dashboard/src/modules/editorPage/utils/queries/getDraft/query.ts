@@ -7,7 +7,32 @@ export const GET_DRAFT = gql`
         id
         attributes {
           name
-          content
+          targeting
+          components {
+            data {
+              id
+              attributes {
+                componentType
+                jsxName
+                layerName
+                parentId
+                styles
+                inputs {
+                  __typename
+                  ... on ComponentPropsStringProp {
+                    id
+                    name
+                    valueString
+                  }
+                  ... on ComponentPropsNumberProp {
+                    id
+                    name
+                    valueNumber
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

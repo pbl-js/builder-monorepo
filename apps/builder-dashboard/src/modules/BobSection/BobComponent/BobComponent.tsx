@@ -70,8 +70,8 @@ export const BobComponent = ({ componentData }: Props) => {
 
   const { width, height = 0, left, top } = matchDomData?.domData || {};
 
-  const { style } = componentData;
-
+  const { styles: style } = componentData;
+  console.log('style', componentData);
   const {
     paddingTop: s_paddingTop = 0,
     paddingBottom: s_paddingBottom = 0,
