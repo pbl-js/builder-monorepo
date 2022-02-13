@@ -2,6 +2,6 @@ import { Dispatch, SetStateAction } from 'react';
 
 export interface IGlobalUiDataContext {
   isDragging: boolean;
-  activeComponents: number[];
+  activeComponents: string[];
   setState: Dispatch<SetStateAction<IGlobalUiDataContext>>;
 }

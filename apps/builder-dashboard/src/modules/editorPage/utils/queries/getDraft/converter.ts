@@ -7,6 +7,7 @@ export const convertGetDraft = (data: StrapiDraftDataResponse): IDraftData => {
     components: data.draft.data.attributes.components.data.map(
       ({ id, attributes }) => {
         return {
+          id,
           ...attributes,
         };
       }

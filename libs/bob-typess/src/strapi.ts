@@ -7,13 +7,13 @@ import {
 export interface Strapi_DraftComponent_DataItem_String
   extends DraftComponent_DataItem_String {
   __typename: 'ComponentPropsStringProp';
-  id: number;
+  id: string;
 }
 
 export interface Strapi_DraftComponent_DataItem_Number
   extends DraftComponent_DataItem_Number {
   __typename: 'ComponentPropsNumberProp';
-  id: number;
+  id: string;
 }
 
 export type Strapi_DraftComponent_DataItem =
@@ -22,7 +22,7 @@ export type Strapi_DraftComponent_DataItem =
 
 // TODO: Przerób section reducer tak żeby dom data dla kompomentów była oddzielnym stanem
 export interface StrapiComponentData
-  extends Omit<IDraftComponentData, 'domData'> {
+  extends Omit<IDraftComponentData, 'domData' | 'id'> {
   inputs: Strapi_DraftComponent_DataItem[];
 }
 
@@ -53,4 +53,19 @@ export type StrapiDraftDataResponse = {
 
 export type StrapiDraftDataVariables = {
   id: number;
+};
+
+// UpdateCOmponent
+export type StrapiUpdateComponentDataResponse = {
+  updateComponent: {
+    data: {
+      id: string;
+      attributes: StrapiComponentData;
+    };
+  };
+};
+
+export type StrapiUpdateComponentDataVariables = {
+  id: string;
+  data: StrapiComponentData;
 };

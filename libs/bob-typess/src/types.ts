@@ -52,11 +52,13 @@ export interface ICustomComponent_ApiPayload {
 // Section
 
 export interface DraftComponent_DataItem_String {
+  id: string;
   name: string;
   valueString: string;
 }
 
 export interface DraftComponent_DataItem_Number {
+  id: string;
   name: string;
   valueNumber: number;
 }

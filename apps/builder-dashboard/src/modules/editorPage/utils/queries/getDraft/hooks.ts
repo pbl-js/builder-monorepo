@@ -21,6 +21,6 @@ export const UseDraft_API = (id: number): UseDraft_API_ReturnType => {
   >(GET_DRAFT, { variables: { id } });
 
   const convertedData = useMemo(() => data && convertGetDraft(data), [data]);
-
+  console.log('convertedDraft', convertedData);
   return { data: convertedData, loading, error };
 };

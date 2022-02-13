@@ -33,15 +33,17 @@ export const CustomComponentItem = (props: Props): JSX.Element => {
       messageType: PostMessageType_FromDashboard.ADD_COMPONENT,
       messageData: {
         componentData: {
-          id: 44,
+          id: '44',
           componentType: ComponentType.CUSTOM,
           jsxName: 'DEV-product-tile',
           layerName: 'test',
-          parentId: 'section',
-          data: {
-            text: 'Pierwszy dodany przez panel',
-            price: 919,
-          },
+          parentId: 0,
+          inputs: [
+            {
+              text: 'Pierwszy dodany przez panel',
+              price: 919,
+            },
+          ],
           styles: {},
         },
       },
