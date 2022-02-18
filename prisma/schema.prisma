@@ -10,22 +10,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// generator typegraphql {
-//   provider = "typegraphql-prisma"
-//   output   = "../apps/builder-api/src/@generated"
-// }
-
-model Post {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  createdAt   DateTime @default(now()) @db.Timestamp(6)
-  content     String?
-  published   Boolean  @default(false)
-  authorId    Int
-  User        User     @relation(fields: [authorId], references: [id])
-}
-
 model Profile {
   id     Int     @id @default(autoincrement())
   bio    String?
@@ -37,60 +21,55 @@ model User {
   id      Int      @id @default(autoincrement())
   name    String?  @db.VarChar(255)
   email   String   @unique @db.VarChar(255)
-  Post    Post[]
   Profile Profile?
 }
 
 // Builder //
-
 enum ComponentType {
-  TEXT
-  IMAGE
   CUSTOM
+  TEXT
   WRAPPER
 }
 
-model Props {
-  id          Int       @id @default(autoincrement())
-  component   Component @relation(fields: [componentId], references: [id])
-  componentId Int       @unique
+model Model {
+  id             Int     @id @default(autoincrement())
+  name           String
+  destinationUrl String
+  drafts         Draft[]
+}
 
+model Draft {
+  id      Int   @id @default(autoincrement())
+  model   Model @relation(fields: [modelId], references: [id])
+  modelId Int   @unique
 
-  width        String
-  height       String
-  marginTop    String
-  marginRight  String
-  marginBottom String
-  marginLeft   String
+  name       String
+  targeting  Json
+  components Component[]
 }
 
 model Component {
-  id            Int           @id @default(autoincrement())
+  id      Int   @id @default(autoincrement())
+  draft   Draft @relation(fields: [draftId], references: [id])
+  draftId Int   @unique
+
   componentType ComponentType
-  Section       Section?      @relation(fields: [sectionId], references: [id])
-  sectionId     Int?
-  props         Props?
+  jsxName       String
+  layerName     String
+  parentId      Int
+  styles        Json
+  inputs        Prop[]
 }
 
-// model ComponentsOrder {
-//   id                Int               @id @default(autoincrement())
-//   componentId       String
-//   nestedComponents  ComponentsOrder[] @relation("ComponentsOrderToComponentsOrder")
-//   componentsOrder   ComponentsOrder?  @relation("ComponentsOrderToComponentsOrder", fields: [componentsOrderId], references: [id])
-//   componentsOrderId Int?
-//   section           Section?          @relation(fields: [sectionId], references: [id])
-//   sectionId         Int?
-// }
+model OriginComponent {
+  id Int @id @default(autoincrement())
 
-model Section {
-  id              Int         @id @default(autoincrement())
-  name            String      @unique
-  destinationUrl  String      @default("http://localhost:1111/graphql")
-  components      Component[]
-  componentsOrder Json
+  name         String
+  styles       Json
+  originInputs Prop[]
 }
 
-// new
+// Prop
 enum ValueType {
   STRING
   NUMBER
@@ -144,8 +123,13 @@ model PropValue {
 
 model Prop {
   id          Int        @id @default(autoincrement())
-  componentId Int
-  name        String     @unique
-  valueType   ValueType
-  value       PropValue?
+  component   Component? @relation(fields: [componentId], references: [id])
+  componentId Int?       @unique
+
+  originComponent   OriginComponent? @relation(fields: [originComponentId], references: [id])
+  originComponentId Int?             @unique
+
+  name      String     @unique
+  valueType ValueType
+  value     PropValue?
 }
