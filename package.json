@@ -9,7 +9,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "api": "nx run builder-api:serve",
+    "api": "nx run builder-api-express:serve",
     "dashboard": "nx run builder-dashboard:serve --port=3333",
     "iframe": "nx run builder-iframe:serve --port=4444"
   },
@@ -49,7 +49,7 @@
     "@nrwl/cli": "13.1.4",
     "@nrwl/cypress": "13.2.1",
     "@nrwl/eslint-plugin-nx": "13.1.4",
-    "@nrwl/express": "13.1.4",
+    "@nrwl/express": "^13.1.4",
     "@nrwl/jest": "13.1.4",
     "@nrwl/linter": "13.1.4",
     "@nrwl/next": "^13.2.1",

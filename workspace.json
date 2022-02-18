@@ -3,6 +3,7 @@
   "projects": {
     "bob-typess": "libs/bob-typess",
     "builder-api": "apps/builder-api",
+    "builder-api-express": "apps/builder-api-express",
     "builder-dashboard": "apps/builder-dashboard",
     "builder-iframe": "apps/builder-iframe",
     "builder-npm": "libs/builder-npm"
