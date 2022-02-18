@@ -89,3 +89,63 @@ model Section {
   components      Component[]
   componentsOrder Json
 }
+
+// new
+enum ValueType {
+  STRING
+  NUMBER
+  OBJECT
+}
+
+model PropValueString {
+  id          Int       @id @default(autoincrement())
+  propValue   PropValue @relation(fields: [propValueId], references: [id])
+  propValueId Int       @unique
+
+  value String
+}
+
+model PropValueNumber {
+  id          Int       @id @default(autoincrement())
+  propValue   PropValue @relation(fields: [propValueId], references: [id])
+  propValueId Int       @unique
+
+  value Int
+}
+
+model PropValueObjectFragment {
+  id                Int             @id @default(autoincrement())
+  propValueObject   PropValueObject @relation(fields: [propValueObjectId], references: [id])
+  propValueObjectId Int             @unique
+
+  propValue   PropValue @relation(fields: [propValueId], references: [id])
+  propValueId Int       @unique
+  key         String
+}
+
+model PropValueObject {
+  id          Int       @id @default(autoincrement())
+  propValue   PropValue @relation(fields: [propValueId], references: [id])
+  propValueId Int       @unique
+
+  fields PropValueObjectFragment[]
+}
+
+model PropValue {
+  id                      Int                      @id @default(autoincrement())
+  prop                    Prop                     @relation(fields: [propId], references: [id])
+  propId                  Int                      @unique
+  propValueObjectFragment PropValueObjectFragment?
+
+  stringValue PropValueString?
+  numberValue PropValueNumber?
+  objectValue PropValueObject?
+}
+
+model Prop {
+  id          Int        @id @default(autoincrement())
+  componentId Int
+  name        String     @unique
+  valueType   ValueType
+  value       PropValue?
+}
